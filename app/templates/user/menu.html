@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Ai-go</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user/css/person-homepage.css') }}"/>
+    {% block css %}{% endblock %}
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!--小屏幕导航按钮和logo-->
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--导航-->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{{ url_for('main.index') }}">首页
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.demand_release') }}">发布需求</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('main.demo_release') }}">发布demo</a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-left" role="search" style="margin-top:18px;" method="post"
+                  action="{{ url_for('main.search', page=1) }}">
+                <div class="form-group input-group">
+                    <div class="input-group-btn">
+                        <button id="option" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">demo <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="option-1">demo</a></li>
+                            <li><a href="#" id="option-2">需求</a></li>
+                            <li><a href="#" id="option-3">人才</a></li>
+                        </ul>
+                        <input type="text" name="methods" id="methods" hidden value="1">
+                    </div>
+                    <input type="text" name="key" class="form-control" placeholder="请输关键词！" id="key_moive">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="do_search"><span class="glyphicon glyphicon-search"></span>&nbsp;搜索</button>
+                    </span>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user %}
+                    <li>
+                        <a class="curlink"
+                           href="{% if is_user==True %}{{ url_for('user.logout') }}{% elif is_user==False %}{{ url_for('enterprise.logout') }}{% endif %}">
+                            <span class="glyphicon glyphicon-log-out"></span>&nbsp;注销</a>
+                    </li>
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span class="glyphicon glyphicon-log-in"></span>&nbsp;登录</a></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('user.login') }}">个人登录</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ url_for('enterprise.login') }}">企业登录</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="glyphicon glyphicon-plus"></span>&nbsp;注册</a></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('user.register') }}">个人注册</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{ url_for('enterprise.register') }}">企业注册</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="curlink" href="{% if is_user == True %}{{ url_for('user.index') }}{% elif is_user == False %}{{ url_for('enterprise.index') }}{% else %}{{ url_for('user.login') }}{% endif %}">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;个人中心</a>
+                </li>
+                <li>
+                    <a class="curlink" href="../user/user.html">
+                        <span class="glyphicon glyphicon-envelope"></span>&nbsp;私信</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--导航-->
+<!--内容-->
+<div class="container-fluid" style="padding-right: 0px; padding-left: 0px; margin-top: 74px">
+    <section>
+        <div class="main-body">
+            <div class="my-top" style="position: relative;">
+                {% if user.face %}
+                    <img src="{{ url_for('static', filename='uploads/user/'+user.uuid+'/'+user.face) }}" alt=""
+                         class="photo">
+                {% else %}
+                    <img src="holder.js/100x100" class="img-responsive img-rounded photo">
+                {% endif %}
+                <a href="{{ url_for('user.index') }}"><span class="change">修改资料</span></a>
+                <!-- p最多写4行 -->
+                <h4>
+                    {{ user.name }}
+                    <p> {{ user.info }}
+                    </p>
+                </h4>
+            </div>
+            <div>
+                <div class="myleft">
+                    <ul>
+                        <li>
+                            <a id="m-1" href="{{ url_for('user.match') }}">
+                                &nbsp;我的demo
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-2" href="{{ url_for('user.resolve') }}">
+                                &nbsp;我的方案
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-4" href="{{ url_for('user.pwd') }}">
+                                &nbsp;修改密码
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-5" href="{{ url_for('user.demo_col') }}">
+                                &nbsp;收藏项目
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-6" href="{{ url_for('user.followed') }}">
+                                &nbsp;我的关注
+                            </a>
+                        </li>
+                        <!--
+                        <li>
+                            <a id="m-8" href="{{ url_for('user.crowd_funding') }}">&nbsp;众筹demo</a>
+                        </li>
+                        -->
+                        <li>
+                            <a id="m-9" href="{{ url_for('user.portrait') }}">
+                                &nbsp;我的画像
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-10" href="{{ url_for('user.knowledge_graph') }}">
+                                &nbsp;知识图谱
+                            </a>
+                        </li>
+                        <li>
+                            <a id="m-11" href="{{ url_for('user.gamification') }}">
+                                &nbsp;学习进程
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="m-12" href="{{ url_for('user.my_improve') }}">
+                                &nbsp;我的改进
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                {% block builtin %}{% endblock %}
+
+            </div>
+        </div>
+    </section>
+</div>
+<!--内容-->
+<!--底部-->
+<footer class="myfooter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    版本©&nbsp;2017-2018 归 青青草原 所有&nbsp;版本 1.0
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--底部-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+<script src="{{ url_for('static', filename='lazyload/jquery.lazyload.min.js') }}"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $("img").lazyload({
+            effect: "fadeIn",
+            threshold: 40
+        });
+        var caret = '<span class="caret"></span>';
+        $("#option-1").click(function () {
+            $("#option").html("demo " + caret);
+            $("#methods").attr("value", 1)
+        });
+        $("#option-2").click(function () {
+            $("#option").html("需求 " + caret);
+            $("#methods").attr("value", 2)
+        });
+        $("#option-3").click(function () {
+            $("#option").html("人才 " + caret);
+            $("#methods").attr("value", 1)
+        });
+    });
+</script>
+{% block js %}{% endblock %}
+</body>
+</html>

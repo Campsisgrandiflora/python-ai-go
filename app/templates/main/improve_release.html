@@ -1,0 +1,102 @@
+{% extends 'base/base_1.html' %}
+
+{% block css %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='main/js/jquery.js') }}" ></script>
+
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="background-image: url({{ url_for('static', filename='main/img/发布需求背景_02.gif') }}); background-size: 100%;width: 1200px;margin: 0px auto;">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;填写改进方案说明</h3>
+                </div>
+                <div class="panel-body">
+                    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                        <div class="alert alert-danger" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                        <div class="alert alert-success" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="input_name"><span
+                                        class="glyphicon glyphicon-user"></span>&nbsp;{{ form.name.label }}</label>
+                                {{ form.name }}
+                            </div>
+                            {% for err in form.name.errors %}
+                                <div class="col-md-12" id="input_user">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <label for="input_description"><span
+                                        class="glyphicon glyphicon-text-width"></span>&nbsp;{{ form.description.label }}
+                                </label>
+                                {{ form.description }}
+                            </div>
+                            {% for err in form.description.errors %}
+                                <div class="col-md-12" id="input_user">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_url"><span class="glyphicon glyphicon-upload"></span>{{ form.url.label }}</label>
+                                {{ form.url }}
+                                {% for err in form.url.errors %}
+                                    <div class="col-md-12">
+                                        <font style="color: red">{{ err }}</font>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="box-footer">
+                                {{ form.csrf_token }}
+                                {{ form.submit }}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+
+    <script type="text/javascript">
+        CKEDITOR.replace('description', {
+            {#        开启上传功能，配置上传路径#}
+            filebrowserUploadUrl: '/resolveupload/'
+        });
+    </script>
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+    </script>
+{% endblock %}

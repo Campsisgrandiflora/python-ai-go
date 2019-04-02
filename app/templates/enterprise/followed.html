@@ -1,0 +1,30 @@
+{% extends 'enterprise/menu.html' %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="myright">
+                <div class="R-top">
+                    <p>
+                        <b>我关注的用户</b>
+                    </p>
+                </div>
+                <div class="R-bottom">
+                    {% for data in follows %}
+                        <div class="mylike">
+                            <h3>
+                                <a href="">{{ data.find_user(data).name }}</a>
+                            </h3>
+                            <a href="" class="like-comp">
+                                demand1
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

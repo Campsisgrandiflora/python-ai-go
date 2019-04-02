@@ -1,0 +1,111 @@
+{% extends "base/base.html" %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;企业注册</h3>
+                </div>
+                <div class="panel-body">
+                    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                        <div class="alert alert-danger" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                        <div class="alert alert-success" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    <form role="form" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="input_name"><span
+                                        class="glyphicon glyphicon-user"></span> {{ form.name.label }}</label>
+                                {{ form.name }}
+                            </div>
+                            {% for err in form.name.errors %}
+                                <div class="col-md-12" id="error_name">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_email"><span
+                                        class="glyphicon glyphicon-envelope"></span> {{ form.email.label }}</label>
+                                {{ form.email }}
+                            </div>
+                            {% for err in form.email.errors %}
+                                <div class="col-md-12" id="error_email">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_password"><span
+                                        class="glyphicon glyphicon-lock"></span>&nbsp;{{ form.pwd.label }}</label>
+                                {{ form.pwd }}
+                            </div>
+                            {% for err in form.pwd.errors %}
+                                <div class="col-md-12" id="error_pwd">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_repassword"><span
+                                        class="glyphicon glyphicon-lock"></span>&nbsp;{{ form.repwd.label }}</label>
+                                {{ form.repwd }}
+                            </div>
+                            {% for err in form.repwd.errors %}
+                                <div class="col-md-12" id="error_repwd">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <hr>
+                            <div class="form-group">
+                                <label for=""><span
+                                        class="glyphicon glyphicon-music"></span> 你偏向于发布哪些种类的项目？</label>
+
+                                <ul class="dowebok">
+                                    {% for tag in tags %}
+                                        <li><input type="checkbox" name="{{ tag.id }}"
+                                                   data-labelauty={{ tag.name }}></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            {{ form.csrf_token }}
+                            {{ form.submit }}
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+    </script>
+{% endblock %}

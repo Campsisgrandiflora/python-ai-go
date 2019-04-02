@@ -1,0 +1,36 @@
+{% extends 'enterprise/menu.html' %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="myright">
+                <div class="R-top">
+                    <p>
+                        <b>我参与的众筹</b>
+                    </p>
+                </div>
+
+                <div class="R-bottom">
+                    {% for data in user.democfs %}
+                        <div class="mylike">
+                            <h3>
+                                <a href="">{{ data.find_demo(data).name }}</a>
+                            </h3>
+                            <a href="" class="like-comp">
+
+                                <img src="{{ url_for('static',
+                                filename='uploads/user/'+data.find_demo(data).user.uuid+'/'+data.find_demo(data).user.face) }}"
+                                     class="img-responsive img-rounded" width="100px">
+                            </a>
+                            <h4>&nbsp;&nbsp;&nbsp;demo作者：{{ data.find_demo(data).user.name }}</h4>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

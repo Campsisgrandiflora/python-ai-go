@@ -1,0 +1,25 @@
+
+.my-h4 {
+    display: block;
+    float: right;
+    font-size: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 70px;
+    margin-top: 20px;
+}
+
+.idea-p {
+    display: block;
+    margin-top: 100px;
+    color: white;
+    font-size: 30px;
+}
+
+.my-a {
+    display: block;
+    float: right;
+    margin-top: 10px;
+    margin-right: 18px;
+    color: #AAA7A7;
+}

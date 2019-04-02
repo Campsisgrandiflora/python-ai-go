@@ -1,0 +1,247 @@
+.mylogo {
+    height: 94px;
+    width: 1000px;
+    border-bottom: 2px solid #3399ff;
+    margin: auto;
+    background-color: white;
+}
+
+h3 {
+    display: block;
+    float: left;
+    font-size: 70px;
+    color: #3399ff;
+    font-family: SimHei;
+    margin-left: 20px;
+    line-height: 48px;
+}
+
+.demo-show-main {
+    width: 1000px;
+    margin: 0px auto;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.labelbox {
+    width: 900px;
+    height: 30px;
+    margin: 0px auto;
+}
+
+h4 {
+    display: block;
+    float: left;
+}
+
+.checkbox-h4 {
+    /*margin-top: 18px;*/
+}
+
+.checkbox-div {
+    width: 820px;
+    /*float: left;*/
+    height: auto;
+    margin-top: 10px;
+    display: block;
+}
+
+.sort {
+    width: 900px;
+    height: 35px;
+    background-color: rgb(231, 231, 231);
+    margin: 0px auto 10px auto;
+}
+
+.sort > a:focus {
+    outline: none;
+    box-shadow: none;
+    color: black;
+}
+
+.sort > a:hover {
+    background-color: #3399ff;
+    color: white;
+}
+
+.my-btn-nor {
+    margin-left: 80px;
+    height: 27px;
+    line-height: 15px;
+    margin-top: 2px;
+    color: black;
+    background-color: white;
+    border-radius: 0px;
+}
+
+.my-btn-active {
+    margin-left: 80px;
+    height: 27px;
+    line-height: 15px;
+    margin-top: 2px;
+    color: black;
+    background-color: #F8D802;
+    border-radius: 0px;
+}
+
+.my-btn-search {
+    float: right;
+    height: 33px;
+    line-height: 15px;
+    color: white;
+    background-color: #3399ff;
+    border-radius: 0px;
+}
+
+.demo-show {
+    width: 900px;
+    height: 130px;
+    margin: 0px auto;
+    border-bottom: 2px solid rgb(231, 231, 231);
+}
+
+.label-show {
+    float: left;
+    width: 800px;
+    height: 28px;
+    margin-left: 50px;
+    font-size: 17px;
+}
+
+.number,
+.time {
+    width: 200px;
+    height: 100px;
+    margin: 0px;
+    float: left;
+    margin-left: 50px;
+}
+
+.be-block {
+    display: block;
+    width: 200px;
+    height: 25px;
+    margin-top: 10px;
+    color: #3399ff;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.number a:hover {
+    color: #3399ff;
+}
+
+
+
+.time h5 {
+    color: rgb(206, 206, 206);
+}
+
+.collection {
+    float: right;
+    height: 50px;
+    width: 100px;
+    margin-top: 25px;
+    margin-right: 150px;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+/*这里开始是更改的地方，也就是人才市场的*/
+.human-div {
+    width: 1000px;
+    height: 750px;
+    overflow: auto;
+}
+
+.demo-show {
+    width: 900px;
+    height: 90px;
+    margin: 0px auto;
+    border-bottom: 2px solid rgb(231, 231, 231);
+}
+/*人才头像*/
+.demo-show img {
+    display: block;
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+/*人才名字或者昵称*/
+.demo-show a {
+    width: 150px;
+    display: block;
+    float: left;
+    font-size: 20px;
+    height: 88px;
+    line-height: 88px;
+    margin-left: 45px;
+    color: black;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.demo-show a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+
+.demo-show h5 {
+    font-size: 20px;
+    display: block;
+    float: left;
+    height: 60px;
+    line-height: 70px;
+    margin-left: 30px;
+}
+
+.demo-show td {
+    display: block;
+    float: left;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-family: 黑体;
+    margin-top: 9px;
+    margin-left: 90px;
+}
+
+.numb {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.myfoot {
+    margin-top: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+    background-color: #ACAAAA;
+}
+
+.footleft {
+    height: 40px;
+    margin-left: 10%;
+    float: left;
+}
+
+.footright {
+    height: 40px;
+    margin-right: 10%;
+    float: right;
+}
+
+.select {
+    width: 50px;
+    height: 30px;
+    margin-left: 45px;
+    margin-bottom: 20px;
+}

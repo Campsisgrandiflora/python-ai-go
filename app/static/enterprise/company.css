@@ -1,0 +1,150 @@
+
+/*每个demand以及匹配到的demo*/
+.demand-div {
+
+    width: 670px;
+    height: auto;
+    margin: 15px auto;
+
+    border-radius: 8px;
+    background-color: #cecece;
+    box-shadow: 0px 0px 7px rgba(83, 83, 83, 3);
+}
+/*放每个匹配到的demo*/
+.res-div {
+    height: auto;
+    width: 670px;
+    overflow: auto;
+}
+
+.demand-name {
+    height: 40px;
+    width: 670px;
+    margin: 0px auto;
+    background-color: #cecece;
+    border-bottom: 1.5px solid white;
+}
+
+.demand-name a {
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+
+
+/*以下为 匹配到的demo*/
+
+.blue-block {
+    background-color: #3399ff;
+    height: 20px;
+    width: 7px;
+    margin-top: 10px;
+    float: left;
+}
+
+.res-item {
+    height: 40px;
+    width: 670px;
+    margin: 2px auto;
+     border-radius: 0px;
+    background-color: #cecece;
+    border-bottom: 1.5px solid white;
+}
+
+
+
+
+/*demo方案的链接*/
+
+.res-name {
+    float: left;
+    margin-top: 5px;
+    display: block;
+    height: 30px;
+    width: 270px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+/*demo的作者*/
+.from {
+    float: left;
+    width: 160px;
+    height: 30px;
+    padding: 0px;
+}
+
+.from h5 {
+    width: 30px;
+    display: inline-block;
+}
+
+.from a {
+    width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+/*。。。。。。。。。。。。。。。。。。。。。*/
+
+.score-time {
+    float: right;
+    width: 160px;
+    height: 30px;
+    padding: 0px;
+}
+
+
+
+
+/*评分*/
+
+.score-time h3 {
+    height: 23px;
+    width: 160px;
+    display: inline-block;
+    margin-top: -2px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25px;
+    border-bottom: 1px solid white;
+}
+
+
+
+
+/*发布时间*/
+
+.score-time h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 160px;
+    height: 14px;
+    line-height: 15px;
+}
+
+
+
+
+/*解决方案结束*/

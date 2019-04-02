@@ -1,0 +1,63 @@
+{% macro article_list_table(posts,plate,is_moderator) %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bbs/css/forum.css') }}" charset="utf-8"/>
+    <!-- 如果不是版主，下面不用看，没调过 -->
+    {% if is_moderator == false %}
+        {% for data in posts %}
+            <!-- 文章 -->
+            <div class="article" style="margin-top: -2.5px;position: relative;">
+                <a class="title"
+                   href="{{ url_for('bbs.article_detail', plate_id=plate.id,id=data.id) }}">{{ data.title }}</a>
+                <h4 class="author"> {{ data.author.name }}
+                </h4>
+                <text class="review">
+                    {{ data.reviews_number }}评论 &nbsp&nbsp&nbsp&nbsp 最后回复时间{{ data.last_review_time }}
+                </text>
+            </div>
+        {% endfor %}
+        <!-- 如果是版主，下面开始看 -->
+    {% else %}
+        {% for data in posts %}
+            <div class="container" id="{{ data.id }}">
+                <!-- 文章标题和一些信息 -->
+                <div class="article" style="margin-top: -2.5px;position: relative;">
+                    <a class="title" href="{{ url_for('bbs.article_detail', plate_id=plate.id,id=data.id) }}">
+                     <span id="highlight-{{ data.id }}">
+                        <!-- 如果是精华文章，前面加一个红色的精华标签 -->
+                         {% if data.is_elite == True %}
+                             <span style="color:#f00">[精华]</span>
+                         {% else %}
+                             <span></span>
+                         {% endif %}
+                     </span>
+                        {{ data.title }}
+                    </a>
+                    <h4 class="author">{{ data.author.name }}</h4>
+                    <text class="review">
+                        {{ data.reviews_number }}评论 &nbsp&nbsp&nbsp&nbsp 最后回复时间{{ data.last_review_time }}
+                    </text>
+                </div>
+                <!-- 功能按钮 -->
+                <div class="hoster-fun">
+                    <!-- 加精按钮 -->
+                    <div class="btn1">
+                        {% if data.is_elite == True %}
+                            <button class="highlight" name="unhighlight-{{ data.id }}">
+                                <span>取消加精</span>
+                            </button>
+                        {% else %}
+                            <button class="highlight" name="highlight-{{ data.id }}">
+                                <span>加为精华</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                    <!-- 删除按钮 -->
+                    <div class="btn2">
+                        <button class="delete" name="delete-{{ data.id }}">
+                            <span>删除</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}

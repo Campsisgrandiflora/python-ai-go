@@ -1,0 +1,140 @@
+{% extends 'bbs/bbs_base.html' %}
+{% block css %}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bbs/css/forum.css') }}"
+          charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bbs/css/home.css') }}" charset="utf-8"/>
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="my-home-top">
+            <div class="logo-btn">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='bbs/images/logo.gif') }}" alt="">
+                </div>
+                <div class="row btn-area1">
+                    <h1>
+                        AIGO
+                    </h1>
+                    <a href="{{ url_for('bbs.index') }}" class="myactive">首页</a>
+                    <a href="{{ url_for('bbs.article_list', plate_id=1) }}">人工智能</a>
+                    <a href="{{ url_for('bbs.article_list', plate_id=2) }}">分享交流</a>
+                    <a href="{{ url_for('bbs.article_list', plate_id=1) }}">活动专区</a>
+                    <a href="{{ url_for('bbs.article_list', plate_id=1) }}">职场招聘</a>
+                </div>
+            </div>
+
+            <div class="row introduction">
+                <div style="display: inline;">
+                    <img src="{{ url_for('static', filename='bbs/images/图片1_03.gif') }}" alt=""
+                         class="introduction-img">
+                </div>
+                <div style="display: inline; float: right">
+                    <p>一周热点技术：图像识别，是指利用计算机对图像进行处理、分析和理解，以识别各种 不同模式的目标和对像的技术。一般工业使用中，采用工业相机拍摄图片，然后再 利用软件根据图片灰阶差做进一步识别处理。
+                    </p>
+                </div>
+
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </section>
+    <!-- 下面开始每一块的主体 -->
+    <section>
+        <!-- 第一版块 -->
+        <div class="mainbody" style="background-color: rgb(235,231,231);">
+            <div class="home-part-show">
+                <div>
+                    <button class="home-btn">
+                        人工智能
+                    </button>
+                </div>
+                {% for data in articles1 %}
+                    <div class="home-article">
+                        <a href="{{ url_for('bbs.article_detail', plate_id=1,id=data.id) }}">{{ data.title }}</a>
+                        <h4 class="home-author">
+                            {{ data.author.name }}
+                        </h4>
+                        <h4 class="home-time">
+                            最新回复{{ data.last_review_time }}
+                        </h4>
+                        <text>
+                            {{ data.reviews_number }}评论
+                        </text>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 第二版块 -->
+        <div class="mainbody" style="background-color: rgb(235,231,231);">
+            <div class="home-part-show">
+                <div>
+                    <button class="home-btn">
+                        分享交流
+                    </button>
+                </div>
+                {% for data in articles2 %}
+                    <div class="home-article">
+                        <a href="{{ url_for('bbs.article_detail', plate_id=1,id=data.id) }}">{{ data.title }}</a>
+                        <h4 class="home-author">
+                            {{ data.author.name }}
+                        </h4>
+                        <h4 class="home-time">
+                            最新回复{{ data.last_review_time }}
+                        </h4>
+                        <text>
+                            {{ data.reviews_number }}评论
+                        </text>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 第三版块 -->
+        <div class="mainbody" style="background-color: rgb(235,231,231);">
+            <div class="home-part-show">
+                <div>
+                    <button class="home-btn">
+                        活动专区
+                    </button>
+                </div>
+                {% for data in articles1 %}
+                    <div class="home-article">
+                        <a href="{{ url_for('bbs.article_detail', plate_id=1,id=data.id) }}">{{ data.title }}</a>
+                        <h4 class="home-author">
+                            {{ data.author.name }}
+                        </h4>
+                        <h4 class="home-time">
+                            最新回复{{ data.last_review_time }}
+                        </h4>
+                        <text>
+                            {{ data.reviews_number }}评论
+                        </text>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- 第四版块 -->
+        <div class="mainbody" style="background-color: rgb(235,231,231);">
+            <div class="home-part-show">
+                <div>
+                    <button class="home-btn">
+                        职场招聘
+                    </button>
+                </div>
+                {% for data in articles1 %}
+                    <div class="home-article">
+                        <a href="{{ url_for('bbs.article_detail', plate_id=1,id=data.id) }}">{{ data.title }}</a>
+                        <h4 class="home-author">
+                            {{ data.author.name }}
+                        </h4>
+                        <h4 class="home-time">
+                            最新回复{{ data.last_review_time }}
+                        </h4>
+                        <text>
+                            {{ data.reviews_number }}评论
+                        </text>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

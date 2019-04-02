@@ -1,0 +1,53 @@
+.my-home-top{
+    width: 1100px;
+    margin: 0px auto;
+    margin-top: 51px;
+    background-color: white;
+}
+.home-part-show{
+	width: 1100px;
+	height: 380px;
+	background-color: white;
+}
+.home-btn{
+	border: none;
+	outline: none;
+	height: 40px;
+	background-color: #3399ff;
+	color: white;
+	font-size: 20px;
+	margin-left: 50px;
+}
+.home-part-show div{
+	width: 1000px;
+	margin: 0px auto;
+	border-bottom: 2px solid  #cecece;
+}
+.home-article{
+	height: 55px;
+}
+.home-article a{
+	display: inline-block;
+	width: 14em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 50px;
+    font-size: 20px;
+    color: #3399ff;
+    margin: 0px;
+    float: left;
+    line-height: 50px;
+    margin-left: 20px;
+}
+.home-article a:hover{
+	text-decoration: underline;
+	background: white;
+}
+.home-author,.home-time{
+    display: block;
+	float: left;
+	margin-left: 100px;
+	margin-top: 18px;
+    color: rgb(204,204,204);
+}

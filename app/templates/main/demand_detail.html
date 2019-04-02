@@ -1,0 +1,520 @@
+{% extends 'base/base.html' %}
+{% import "bbs/paginate.html" as macros %}
+{% import "main/little_reply.html" as lr_macros %}
+
+{% block css %}
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <!--  标     志 -->
+
+    <div class="container">
+        <div class="row mylogo">
+            <img src="{{ url_for('static', filename='main/img/logo.gif') }} " alt=""
+                 style="margin-left: 30px;margin-top:2px;float: left;">
+            <p>AIGO</p>
+            <p style="color: black;margin-left: 30px;font-size: 40px;">demand</p>
+        </div>
+    </div>
+    <!-- 主 题 展 示 -->
+    <section>
+        <div class="container">
+            <div class="row demo-show">
+                <div id="show-img">
+                    <form action="#">
+                        <select name="tag" id="">
+                            <option value="计算机图形学">计算机图形学</option>
+                            <option value="机器学习">机器学习</option>
+                            <option value="神经网络">神经网络</option>
+                        </select>
+                        <button class="btn btn-primary">选择</button>
+                    </form>
+                </div>
+                <div class="more-info">
+                    <p>
+                        {{ demand.name }}
+                    </p>
+                    <table style="margin-top: 20px;">
+                        <tr>
+                            <td>
+                                发布者：
+                            </td>
+                            <td>
+                                <a href="{{ url_for('enterprise.zone',enterprise_id=demand.enterprise.id ) }}"> {{ demand.enterprise.name }}</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                发布时间：
+                            </td>
+                            <td>
+                                {{ demand.addtime }}
+                            </td>
+                        </tr>
+
+                    </table>
+                    <!--  星星标记和不感兴趣 -->
+                    <div class="star">
+                        {% if is_user %}
+                            {% if not user.has_demandcol(demand) %}
+                                <button class="collect" style="color: black;">
+                                    <span class="glyphicon glyphicon-star-empty" style="font-size: 25px;"></span>
+                                </button>
+                            {% else %}
+                                <button class="collect" style="color:#3399ff">
+                                    <span class="glyphicon glyphicon-star" style="font-size:25px"></span>
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <button class="collect" style="color: black;">
+                                <span class="glyphicon glyphicon-star-empty" style="font-size: 25px;"></span>
+                            </button>
+                        {% endif %}
+                        <h4>{{ demand.col_number(demand) }}</h4>
+
+                    </div>
+
+                    <!--  众筹 -->
+                    {% if not user==demand.user %}
+                        <div class="to-money-author">
+                            <a href="{{ url_for('main.resolve_release', demand_id=demand.id ) }}"
+                               style="font-size: 20px;line-height:30px;" class="resolve">
+                                上交解决方案
+                            </a>
+                            <div>
+                                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1009164297&site=qq&menu=yes">
+                                    <img style="width: 80%; height: 80%;" border="0"
+                                         src="http://wpa.qq.com/pa?p=2:1009164297:41"
+                                         alt="点击这里给我发消息" title="点击这里给我发消息">
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="to-money-author">
+                            <a href="#" style="font-size: 20px;line-height:30px;" class="resolve">
+                                管理解决方案
+                            </a>
+
+                            <div>
+                                <a href="#" style="font-size: 20px;line-height:30px;">设置加入题库</a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+            <!--   选择详情或者评论 按钮切换已经完成 -->
+
+        </div>
+        </div>
+        <!--   选择详情或者评论 按钮切换已经完成 -->
+        <div class="demo-detail">
+            <div class="change">
+                <button style="margin-left: 50px;" class="my-active" id="detail">
+                    需求详情
+                </button>
+                <button id="comment">
+                    评论
+                </button>
+            </div>
+            <!-- 详情的div -->
+            <div class="info-dd">
+                <div class="info-detail">
+
+                    <p>
+                        {{ demand.description | safe }}
+                    </p>
+                </div>
+
+                <a href="{{ url_for('static', filename='uploads/demand/'+user.uuid+'/'+demand.url) }}"
+                   style="margin-left:20px;margin-bottom:20px;"
+                >附件下载{{ demand.url }}</a>
+            </div>
+
+
+            <!-- 评论的div -->
+            <div class="comment-dd" style="display: none;">
+                <div class="comment-reply">
+                    <div class="reply-area">
+                        {% for data in page_reviews %}
+                            {% if data.is_user(data) %}
+                                <div>
+                                    <div class="main-article2" id="{{ data.id }}" style="width:1050px;">
+                                        <a href="" class="users">
+                                            <img src=""
+                                                 alt="" class="avatar"></a>
+                                        <!-- 回复者的网名 -->
+                                        <p class="name-p">{{ data.if_is_user.name }}</p>
+                                        <div style="clear: both;"></div>
+
+                                        <div class="word">
+
+                                            <!-- 大回复内容 -->
+                                            <p>
+                                                {{ data.description | safe }}
+                                            </p>
+                                            <!-- 这是加图片的 -->
+                                            <img src="" alt="">
+
+                                            <div class=" container function">
+                                                <!-- 判断是否有权限 -->
+                                                <a href="#">举报</a>
+                                                <text>{{ data.addtime }}</text>
+                                                <button class="users-reply-btn" onclick="reply(this)"> 回复
+                                                </button>
+                                                {% if user.id==data.if_is_user_id or user.id == demo.user_id %}
+                                                    <button class="delete" name="delete-{{ data.id }}">
+                                                        <span>删除评论</span></button>
+                                                {% endif %}
+                                            </div>
+                                            <!--  这里是列出所有小回复 -->
+                                            {{ lr_macros.little_reply(reviews,data,is_user) }}
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <div class="main-article2" id="{{ data.id }}" style="width:1050px;">
+                                        <a href="" class="users">
+                                            <img src=""
+                                                 alt="" class="avatar"></a>
+                                        <!-- 回复者的网名 -->
+                                        <p class="name-p">{{ data.if_is_enterprise.name }}</p>
+                                        <div style="clear: both;"></div>
+
+                                        <div class="word">
+
+                                            <!-- 大回复内容 -->
+                                            <p>
+                                                {{ data.description | safe }}
+                                            </p>
+                                            <!-- 这是加图片的 -->
+                                            <img src="" alt="">
+
+                                            <div class=" container function">
+                                                <!-- 判断是否有权限 -->
+                                                <a href="#">举报</a>
+                                                <text>{{ data.addtime }}</text>
+                                                <button class="users-reply-btn" onclick="reply(this)"> 回复
+                                                </button>
+                                                {% if user.id==data.if_is_enterprise_id or user.id == demand.enterprise_id %}
+                                                    <button class="delete" name="delete-{{ data.id }}">
+                                                        <span>删除评论</span></button>
+                                                {% endif %}
+                                            </div>
+                                            <!--  这里是列出所有小回复 -->
+                                            {{ lr_macros.little_reply(reviews,data,is_user) }}
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="container" style="width:500px;">
+                            <div id="pager" class="mypager">
+                                <div class="pagination">
+                                    {{ macros.pagination_widget(pagination, 'main.demand_detail', id=demand.id) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--解决方案-->
+
+        <div class="demand-div">
+            <!--   需求的名字 -->
+            <div class="demand-name">
+                <a href="#" title="">{{ demand.name }}解决方案</a>
+            </div>
+            <!--   放匹配到的demo的div -->
+            <div class="item-div">
+                {% for data1 in demand.demand_resolves %}
+                    <!--  每条匹配到的demo -->
+                    <div class="res-item">
+                        <div class="blue-block">
+                        </div>
+                        <a href="{{ url_for('main.resolve_detail', id=data1.id ) }}" title="" class="res-name">
+                            {{ data1.name }}
+                        </a>
+                        <div class="from">
+                            <h5>来自</h5>
+                            <a href="" title="">{{ data1.user.name }}</a>
+                        </div>
+                        <div class="score-time">
+                            <h3>
+                                评分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ data1.score }}
+                            </h3>
+                            <h5>
+                                {{ data1.addtime }}
+                            </h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="reply-hoster" id="reply" style="display:none">
+            <p style="font-size:25px;color: #3399ff;margin-top:10px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请评论:</p>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group" style="margin-top:10px">
+                    {{ form.ckdemo(class='ckeditor') }}
+                    <script type="text/javascript">
+                        CKEDITOR.replace("ckdemo", {
+                            filebrowserUploadUrl: '/upcomment/'
+                        });
+                    </script>
+                </div>
+                <div class="form-group box-footer ">
+                    {{ form.submit(class="btn btn-success col-md-8 col-md-offset-2") }}
+                </div>
+
+            </form>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main/css/demo-detail.css') }}"/>
+
+    <script src="{{ url_for('static', filename='main/js/demo-detail.js') }}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".delete").click(function () {
+                {% for data in reviews %}
+                    if (this.name == "delete-{{data.id }}") {
+                        var data = {
+                            'mydata': 'delete_review',
+                            'review_id':{{data.id}}
+                        };
+                        location.reload();
+                        $.ajax(
+                            {
+                                type: 'POST',
+                                contentType: 'application/json; charset=UTF-8',
+                                url: "{{ url_for('main.demand_detail', id=demand.id, page=-1) }}",
+                                data: JSON.stringify(data),
+                                success: function (data) {
+
+                                }
+                            });
+                    }
+                {% endfor %}
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".small_reply_btn").click(function () {
+                {% for data in reviews %}
+                    if (this.name == "review-{{data.id }}") {
+                        var data = {
+                            'mydata': 'small_review',
+                            'review_id':{{data.id}},
+                            'context': document.getElementById("inputarea-{{data.id}}").value
+                        };
+                        $("#inputarea-{{data.id}}").val('');
+                        alert("发表成功");
+                        location.reload();
+                        $.ajax(
+                            {
+                                type: 'POST',
+                                contentType: 'application/json; charset=UTF-8',
+                                url: "{{ url_for('main.demand_detail', id=demand.id, page=-1) }}",
+                                data: JSON.stringify(data),
+                                success: function (data) {
+                                }
+                            });
+                    }
+                {% endfor %}
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".collect").click(function () {
+
+                if ((this.style.color) == "black") {
+                    var data = {
+                        'mydata': 'favourite_demand'
+                    };
+                    $(this).children().removeClass('glyphicon glyphicon-star-empty');
+                    $(this).children().addClass('glyphicon glyphicon-star');
+                    this.style.color = "#3399ff";
+                    alert('收藏成功');
+                    location.reload();
+                    $.ajax(
+                        {
+                            type: 'POST',
+                            contentType: 'application/json; charset=UTF-8',
+                            url: "{{ url_for('main.demand_detail', id=demand.id, page=-1)  }}",
+                            data: JSON.stringify(data),
+                            success: function (data) {
+                            }
+                        });
+                }
+                else {
+                    $(this).children().removeClass('glyphicon glyphicon-star');
+                    $(this).children().addClass('glyphicon glyphicon-star-empty');
+                    this.style.color = "black";
+                    var data = {
+                        'mydata': 'unfavourite_demand'
+                    };
+                    alert('取消收藏成功');
+                    location.reload();
+                    $.ajax(
+                        {
+                            type: 'POST',
+                            contentType: 'application/json; charset=UTF-8',
+                            url: "{{ url_for('main.demand_detail', id=demand.id, page=-1)  }}",
+                            data: JSON.stringify(data),
+                            success: function (data) {
+
+                            }
+                        });
+                }
+
+            });
+        });
+    </script>
+    <script>
+        var nodes = [
+            {% for n in nodes %}
+                {{ n | tojson | safe }} ,
+            {% endfor %}
+        ];
+        var edges = [
+            {% for e in edges %}
+                {{ e | tojson | safe }},
+            {% endfor %}
+        ];
+
+        var width = 500,
+            height = 330;
+
+        var svg = d3.select("#show-img")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var force = d3.layout.force()
+            .nodes(nodes)
+            .links(edges)
+            .size([width, height])
+            .linkDistance(80)//指定连线长度
+            .charge([-300]);//指定相互之间的作用力
+        //负电荷数
+        //上面的语句定义了力布局方式
+        //并用力布局的方式使得原始数据变成了画力导向图
+        //所需要的数据格式
+        force.start();//开始作用力
+
+        console.log(nodes);
+        console.log(edges);
+
+        //看控制台输出的数据，已经发生了变化
+
+        var color = d3.scale.category20();
+
+        function addclass(i) {
+            i++;
+            return i;
+        }
+        //添加节点
+        var svg_nodes = svg.selectAll("circle")
+            .data(nodes)
+            .enter()
+            .append("circle")
+            .attr("r", 10)
+            .attr("class", function (d, i) {
+                return addclass(i);
+            })
+            .attr("fill", function (d, i) {
+                return color(i);
+            })
+            .call(force.drag);
+        //call使得节点能够被拖拽
+        //添加连线
+        var svg_edges = svg.selectAll("line")
+            .data(edges)
+            .enter()
+            .append("line")
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 1);
+        //添加文字
+        var svg_texts = svg.selectAll("text")
+            .data(nodes)
+            .enter()
+            .append("text")
+            .attr("fill", "orange")
+            .attr("dx", 20)
+            .attr("dy", 8)
+            .text(function (d) {
+                return d.name;
+            });
+
+        //第一次敲到这儿的时候，我打开网页看了一下效果
+        //本以为会有静态的图，结果是所有东西都聚在了左上角
+        //想想可能是因为上面只是添加了一些元素
+        //指定了一些相对位置以及确定的量
+        //但是具体的元素坐标等还是没有说明
+        //所以需要下面这一段代码
+
+        force.on("tick", function () {
+            svg_edges.attr("x1", function (d) {
+                return d.source.x;
+            })
+                .attr("y1", function (d) {
+                    return d.source.y;
+                })
+                .attr("x2", function (d) {
+                    return d.target.x;
+                })
+                .attr("y2", function (d) {
+                    return d.target.y;
+                });
+
+            svg_nodes.attr("cx", function (d) {
+                return d.x;
+            })
+                .attr("cy", function (d) {
+                    return d.y;
+                });
+
+            svg_texts.attr("x", function (d) {
+                return d.x;
+            })
+                .attr("y", function (d) {
+                    return d.y;
+                });
+        });
+
+        {#        $(".graph").hide();#}
+        //tick：滴答滴答，鼠标触发事件
+        $(".btn").click(function () {
+            $(".graph").show();
+        });
+        $(document).ready(function () {
+            $("circle").dblclick(function () {
+                window.open("http://study.163.com/courses-search?keyword=%E5%9B%BE%E5%BD%A2%E5%AD%A6");
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'enterprise/menu.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/css/user.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block builtin %}
+      <div class="container">
+        <div class="col-md-9">
+                <div class="panel-body">
+                    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                        <div class="alert alert-danger" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                        <div class="alert alert-success" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="input_name">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                                    {{ form.name.label }}
+                                </label>
+                                {{ form.name }}
+                            </div>
+                            {% for err in form.name.errors %}
+                                <div class="col-md-12" id="error_name">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_email">
+                                    <span class="glyphicon glyphicon-envelope"></span>&nbsp;
+                                    {{ form.email.label }}
+                                </label>
+                                {{ form.email }}
+                            </div>
+                            {% for err in form.email.errors %}
+                                <div class="col-md-12" id="error_email">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_phone">
+                                    <span class="glyphicon glyphicon-phone"></span>
+                                    &nbsp;{{ form.phone.label }}
+                                </label>
+                                {{ form.phone }}
+                            </div>
+                            {% for err in form.phone.errors %}
+                                <div class="col-md-12" id="error_phone">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_face">
+                                    <span class="glyphicon glyphicon-picture"></span>
+                                    &nbsp;{{ form.face.label }}
+                                </label>
+                                {{ form.face }}
+                                {% if user.face %}
+                                    <img src="{{ url_for('static', filename='uploads/enterprise/'+user.uuid+'/'+user.face) }}"
+                                         class="img-responsive img-rounded" width="100px">
+                                {% else %}
+                                    <img src="holder.js/100x100" class="img-responsive img-rounded">
+                                {% endif %}
+                            </div>
+                            {% for err in form.face.errors %}
+                                <div class="col-md-12" id="error_face">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_info">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    &nbsp;{{ form.info.label }}
+                                </label>
+                                {{ form.info }}
+                            </div>
+                            {% for err in form.info.errors %}
+                                <div class="col-md-12" id="error_info">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            {{ form.csrf_token }}
+                            {{ form.submit | safe }}
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <!--内容-->
+{% endblock %}

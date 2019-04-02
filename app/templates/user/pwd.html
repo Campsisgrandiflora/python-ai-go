@@ -1,0 +1,48 @@
+{% extends 'user/menu.html' %}
+
+{% block builtin %}
+
+    <div class="container">
+        <div class="col-md-9">
+            <div class="panel-body">
+                {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                    <div class="alert alert-danger" role="alert">
+                        <p class="alert-link">{{ msg }}</p>
+                    </div>
+                {% endfor %}
+                {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                    <div class="alert alert-success" role="alert">
+                        <p class="alert-link">{{ msg }}</p>
+                    </div>
+                {% endfor %}
+                <form role="form" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="input_oldpwd"><span
+                                    class="glyphicon glyphicon-lock"></span>&nbsp;{{ form.old_pwd.label }}</label>
+                            {{ form.old_pwd }}
+                        </div>
+                        {% for err in form.old_pwd.errors %}
+                            <div class="col-md-12" id="error_old_pwd">
+                                <font style="color: red">{{ err }}</font>
+                            </div>
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="input_newpwd"><span
+                                    class="glyphicon glyphicon-lock"></span>&nbsp;{{ form.new_pwd.label }}</label>
+                            {{ form.new_pwd }}
+                        </div>
+                        {% for err in form.new_pwd.errors %}
+                            <div class="col-md-12" id="error_new_pwd">
+                                <font style="color: red">{{ err }}</font>
+                            </div>
+                        {% endfor %}
+                        {{ form.csrf_token }}
+                        {{ form.submit | safe }}
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

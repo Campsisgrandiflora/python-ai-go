@@ -1,0 +1,220 @@
+.mylogo {
+    height: 60px;
+    width: 900px;
+    margin: 0px auto;
+    margin-top: 60px;
+    background-size: 100%;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+
+.mylogo img {
+    height: 50px;
+}
+
+.mylogo h3 {
+    display: block;
+    float: left;
+    font-size: 45px;
+    color: #3399ff;
+    font-family: SimHei;
+    margin-left: 20px;
+    line-height: 20px;
+}
+
+.main-body {
+    height: 500px;
+    width: 900px;
+    margin: 0px auto;
+    margin-top: 15px;
+}
+/*详情div的样式*/
+.res-detail {
+    width: 600px;
+    height: 500px;
+    background-color: white;
+    float: left;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+
+.res-detail a {
+    display: block;
+    margin-left: 30px;
+    margin-top: 10px;
+    width: 500px;
+    height: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+    font-family: 黑体;
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.res-detail a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+
+.res-detail h2 {
+    margin-left: 30px;
+    margin-top: 20px;
+    display: inline-block;
+    width: 500px;
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    letter-spacing: 1px;
+    font-family: 黑体;
+}
+
+.word-discribe {
+    width: 550px;
+    height: 380px;
+    margin: 0px auto;
+    overflow: auto;
+}
+
+.res-detail p {
+    text-indent: 2em;
+}
+
+.download a {
+    display: block;
+    margin-left: 30px;
+    margin-top: 10px;
+    width: 500px;
+    height: 30px;
+    line-height: 30px;
+    font-family: 黑体;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+/*该区域的样式应用于右边上面一部分的div*/
+
+.company {
+    width: 280px;
+    height: 170px;
+    margin-left: 20px;
+    float: left;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+    background-color: white;
+}
+
+.company td {
+    display: block;
+    float: left;
+    height: 35px;
+    font-size: 20px;
+    color: #cecece;
+    margin-top: 15px;
+    margin-left: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.blue-block {
+    background-color: #3399ff;
+    height: 30px;
+    width: 10px;
+    float: left;
+}
+
+td a {
+    color: #cecece;
+}
+
+td a:hover {
+    color: #218EE8;
+    text-decoration: none;
+}
+
+
+
+
+/*该区域的样式应用于右边下面一部分的div*/
+
+.res-from {
+    width: 280px;
+    height: 310px;
+    margin-left: 20px;
+    margin-top: 20px;
+    float: left;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+    background-color: white;
+}
+
+.res-from h4 {
+    margin-top: 20px;
+    margin-left: 30px;
+    color: #0AF7EB
+}
+
+.res-from img {
+    width: 50px;
+    height: 50px;
+    margin-left: 30px;
+}
+
+.res-from a {
+    display: block;
+    float: right;
+    margin-right: 20px;
+    color: skyblue;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ability {
+    width: 260px;
+    margin: 10px auto;
+    height: 190px;
+
+    overflow: auto;
+}
+
+
+/*最下面那块div什么评分的*/
+
+.score {
+    height: 350px;
+    width: 900px;
+    margin: 0px auto;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+    background-color: white;
+}
+
+.score h3 {
+    display: inline-block;
+    padding: 0px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+
+.remain {
+    height: 270px;
+    width: 800px;
+    margin: 0px auto;
+
+}

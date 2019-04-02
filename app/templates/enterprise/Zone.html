@@ -1,0 +1,145 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class="main-body">
+<div id="container">
+    <div class="rect" id="panel-top">
+        <div id="container-img-background"><img src="{{ url_for('static', filename='user/images/背景_1.gif') }}" alt="" id="img-background"></div>
+        <p id="label-my-title">{{user.name}}的个人空间</p>
+        <p id="label-my-describe">{{user.info}}</p>
+        <div class="lable" id="container-label-my3">
+            <p id="label-my-follows">关注：{{user.follow_ent(user)}}</p>
+            <p id="label-my-fans">粉丝：{{user.ent_follow(user)}}</p>
+
+        </div>
+        {%if is_user%}
+        {%if not me.is_following(user)%}
+        <button type="button" class="btn-blue-line" id="btn-follow" name="follow"><span>关注</span></button>
+        {%else%}
+        <button type="button" class="btn-blue-line" id="btn-follow" name="unfollow"><span>取消关注</span></button>
+        {%endif%}
+        {%endif%}
+
+        <button type="button" class="btn-blue-line" id="btn-message">私信</button>
+    </div>
+    <div id="panel-left">
+        <div class="rect" id="userinfo">
+            {% if user.face %}
+            <img src="{{ url_for('static', filename='uploads/enterprise/'+user.uuid+'/'+user.face) }}" class="rect"
+                 alt="头像" id="img-head">
+            {% else %}
+                <img src="holder.js/144x144" class="img-responsive img-rounded" id="img-head">
+            {% endif %}
+
+            <div id="container-label-user5">
+                <p class="label-userinfo" id="label-user-nick">公司名称：{{user.name}}</p>
+
+            </div>
+        </div>
+        <div class="rect" id="crowdfunding">
+            <div id="contianer-label-crowdfunding">
+                <div class="blue-rect" id="blue-rect-small4"></div>
+                <p id="label-crowdfunding">众筹经历</p>
+            </div>
+            <p class="label-userinfo" id="label-crowdfunding1">TA参与的：{{user.cf_count(user)}}</p>
+            <button type="button" class="btn-blue-line" id="btn-view">查看</button>
+        </div>
+    </div>
+    <div id="panel-mid">
+        <div class="rect" id="portrait">
+            <div id="contianer-label-user-protrait">
+                <div class="blue-rect" id="blue-rect1"></div>
+                <p id="label-user-protrait">企业画像</p>
+            </div>
+            <div id="container-graph-protrait">
+                <div class="rect" id="graph-protrait1">
+                    <div id="contianer-label-user-protrait1">
+                        <div class="blue-rect" id="blue-rect-small1"></div>
+                        <p id="label-user-protrait1">综合能力评价</p>
+                    </div>
+                </div>
+                <div class="rect" id="graph-protrait2">
+                    <div id="contianer-label-user-protrait2">
+                        <div class="blue-rect" id="blue-rect-small2"></div>
+                        <p id="label-user-protrait2">个人评价</p>
+                    </div>
+                </div>
+                <div class="rect" id="graph-protrait3">
+                    <div id="contianer-label-user-protrait3">
+                        <div class="blue-rect" id="blue-rect-small3"></div>
+                        <p id="label-user-protrait3">他人评价</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="rect" id="demo">
+            <div class="container" id="contianer-label-demo">
+                <div class="blue-rect" id="blue-rect2"></div>
+                <p id="label-demo">TA发布的需求</p>
+            </div>
+            <div class="container" id="contianer-label-demos">
+                {%for data in user.demands%}
+                <p class="label-demo" id="label-demo1"><a class="title" href="{{url_for('main.demand_detail', id=data.id, page=-1)}}">{{data.name}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.addtime}}</a></p>
+                {%endfor%}
+            </div>
+        </div>
+
+    </div>
+</div>
+    </div>
+</body>
+</html>
+{% endblock %}
+
+{% block js %}
+
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user/css/Zone.css') }}"/>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+<script>
+             $(document).ready(function () {
+            $("#btn-follow").click(function () {
+
+                if (this.name == "follow" ) {
+                    var data = {
+                        'mydata': 'follow'
+                    };
+                    this.innerHTML = "<span>取消关注</span>";
+                    this.name="unfollow";
+                    location.reload();
+                    $.ajax(
+                        {
+                            type: 'POST',
+                            contentType: 'application/json; charset=UTF-8',
+                            url: "{{ url_for('enterprise.zone', enterprise_id=user.id) }}",
+                            data: JSON.stringify(data),
+                            success: function (data) {
+                            }
+                        });
+                }
+                else if (this.name == "unfollow" ) {
+                    var data = {
+                        'mydata': 'unfollow'
+                    };
+                    this.innerHTML = "<span>关注</span>";
+                    this.name="unfollow";
+                    location.reload();
+                    $.ajax(
+                        {
+                            type: 'POST',
+                            contentType: 'application/json; charset=UTF-8',
+                            url: "{{ url_for('enterprise.zone', enterprise_id=user.id) }}",
+                            data: JSON.stringify(data),
+                            success: function (data) {
+
+                            }
+                        });
+                }
+
+            });
+        });
+
+</script>
+{% endblock %}

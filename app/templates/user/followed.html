@@ -1,0 +1,73 @@
+{% extends 'user/menu.html' %}
+
+{% block builtin %}
+
+    <div class="container">
+        <div class="col-md-9">
+            <div class="myright">
+                <ul class="nav nav-tabs" style="margin-top: 10px;">
+                    <li role="presentation" class="active nav1"><a href="#">我关注的用户</a></li>
+                    <li role="presentation" class="nav2"><a href="#">我关注的企业</a></li>
+                </ul>
+{#                <div class="R-top">#}
+{#                    <p>#}
+{#                        <b>我关注的用户</b>#}
+{#                    </p>#}
+{#                </div>#}
+                <div class="R-bottom" id="followed">
+                    {% for data in user.followeds %}
+                        <div class="mylike">
+                            <h3>
+                                <a href="#">{{ data.find_followed(data).name }}</a>
+                            </h3>
+                            <a href="" class="like-comp">
+                                {% if data.find_followed(data).face %}
+                                    <img src="{{ data.find_followed(data).face }}" alt="">
+                                {% else %}
+                                    <img src="holder.js/100x100" alt="">
+                                {% endif %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="R-bottom" style="display: none;" id="ent_followed">
+                    {% for data in follows %}
+                        <div class="mylike">
+                            <h3>
+                                <a href="">{{ data.find_enterprise(data).name }}</a>
+                            </h3>
+                            <a href="" class="like-comp">
+                                demand1
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            $(".nav1").click(function () {
+                $("#followed").show();
+                $("#ent_followed").hide();
+
+                $(".nav1").addClass('active');
+                $(".nav2").removeClass('active');
+            });
+
+            $(".nav2").click(function () {
+                $("#followed").hide();
+                $("#ent_followed").show();
+
+                $(".nav2").addClass('active');
+                $(".nav1").removeClass('active');
+            });
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'enterprise/menu.html' %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="panel-body">
+                <div class="myright">
+                    <div class="R-top">
+                        <p>
+                            <b>智能匹配</b>
+                        </p>
+                    </div>
+                    <div class="R-bottom">
+                        {% for data in user.demands %}
+                            <div class="myitem">
+                                <h3>
+                                    <a href="{{ url_for('main.demo_detail', id=data.id) }}">{{ data.name }}</a>
+                                </h3>
+                                <button><span class="glyphicon glyphicon-refresh" style="font-size: 23px;"></span>
+                                </button>
+                                <a href="" class="demo-comp">
+                                    demand1
+                                </a>
+                                <a href="" class="demo-comp">
+                                    demand2
+                                </a>
+                                <a href="" class="demo-comp">
+                                    demand3
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#                <div class="panel-body">#}
+    {#                    {% if demanddic!={} %}#}
+    {#                        {% for id in demanddic.keys() %}#}
+    {#                            <div>#}
+    {#                                <span>demand为{{ demanddic[id].name }}</span>#}
+    {#                            </div>#}
+    {#                            <div>#}
+    {#                                <span>推荐的demo为</span>#}
+    {#                                {% for demo in redic[id] %}#}
+    {#                                    <span>{{ demo.name }}</span>#}
+    {#                                {% endfor %}#}
+    {#                            </div>#}
+    {#                        {% endfor %}#}
+    {#                    {% else %}#}
+    {#                        <div class="col-md-6" style="background-color: white; height: 400px;">#}
+    {#                            <div style="margin-top: 20px; font-size: large">#}
+    {#                                <span>你还没有发布过demand哟，赶紧去发布一个吧~</span>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    {% endif %}#}
+    {#                </div>#}
+    {#            </div>#}
+    {#    </div>#}
+    {#    </div>#}
+{% endblock %}
+
+{% block js %}
+    <script href="{{ url_for('static', filename='plus-in/jQuery.textSlider.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#scrollDiv").textSlider({line: 2, speed: 500, timer: 3000});
+        });
+    </script>
+{% endblock %}
+

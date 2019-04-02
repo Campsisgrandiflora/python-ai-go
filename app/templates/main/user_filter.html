@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+
+{% import "ui/main_page.html" as pg %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/css/user_list.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            display: inline-block;
+        }
+
+        input.labelauty + label {
+            font: 16px "Microsoft Yahei";
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {#    {% for data in page_data %}#}
+    {#        <div>#}
+    {#            <a href="{{ url_for('main.demo_detail', id=data.id) }}">{{ data.name }}</a>#}
+    {#            {% for tag in data.tags %}#}
+    {#                <p>{{ tag }}</p>#}
+    {#            {% endfor %}#}
+    {#        </div>#}
+    {#    {% endfor %}#}
+
+    <div style="background-color: rgb(231,231,231);">
+        <!--  标     志 -->
+        <div class="mylogo">
+            <img src="{{ url_for('static', filename='main/img/logo_03.gif') }}" alt=""
+                 style="margin-left: 20px;margin-top: 10px;float: left;">
+            <h3>AIGO</h3>
+            <h3 style="color: black;margin-left: 50px;font-size: 50px;">人才库</h3>
+        </div>
+
+        <!-- 主 题 展 示 -->
+        <section>
+            <div class="demo-show-main">
+                <div class="labelbox">
+                    <h4 class="checkbox-h4">技术标签</h4>
+                </div>
+                <form action="{{ url_for('main.user_filter', page=1) }}" method="post">
+                    <div class="checkbox-div">
+                        <ul class="dowebok">
+
+                            {% for tag in tags %}
+                                <li><input type="checkbox" name="{{ tag.id }}"
+                                           data-labelauty={{ tag.name }}></li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div class="select">
+                        <button type="submit" class="btn my-btn-search">筛选</button>
+                    </div>
+                    <div class="sort">
+                        <h4 style="line-height: 8px;font-size: 18px;margin-left: 15px;">排序</h4>
+                        <button id='b1' class="btn my-btn-nor" onclick="change(this)">智能排序</button>
+                        <button id='b2' class="btn my-btn-nor" onclick="change(this)">名称排序</button>
+                        <button id='b3' class="btn my-btn-nor" onclick="change(this)">注册时间<span
+                                class="glyphicon glyphicon-arrow-up"></span></button>
+                        <button id='b4' class="btn my-btn-nor" onclick="change(this)">粉丝数<span
+                                class="glyphicon glyphicon-arrow-up"></span></button>
+                        {#                        <button type="submit" class="btn my-btn-search">筛选</button>#}
+                    </div>
+                </form>
+
+                <div>
+                    <div class="human-div">
+                        {% for v in userlis %}
+
+                            <!--  下面的div是每个人才的条目 -->
+                            <div class="demo-show" style="margin-top: 5px;">
+                                {% if v.face %}
+                                    <img src="{{ url_for('static', filename='uploads/user/'+v.uuid+'/'+v.face) }}"
+                                         class="photo">
+                                {% else %}
+                                    <img src="holder.js/70x70" class="photo">
+                                {% endif %}
+                                <!--   下面的a链接是人才的名字链接到他的个人空间对外版 -->
+                                <a href="{{ url_for("user.zone", user_id=v.id) }}">{{ v.name }}</a>
+                                <h5>{{ v.addtime }}</h5>
+                                <h5 style="margin-left: 5px;">注册</h5>
+                                <table>
+                                    <tr>
+                                        <td class="numb" style="margin-left: 40px;">{{ v.demo_number(v) }}</td>
+                                        <td class="numb">{{ v.fans }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="margin-left: 40px;">demo发布数</td>
+                                        <td>粉丝数</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="demo-show" style="border-bottom: none">
+                        {{ pg.page(page_data, 'main.user_list') }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='main/js/demand_list.js') }}" type="text/javascript" charset="utf-8"
+            async defer></script>
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+    </script>
+
+{% endblock %}

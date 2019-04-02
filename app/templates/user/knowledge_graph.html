@@ -1,0 +1,331 @@
+{% extends 'user/menu.html' %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+        <script src="{{ url_for('static', filename='echart/echarts.min.js') }}"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    {#    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts-gl.js"></script>#}
+
+    {#        <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>#}
+    {#        <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>#}
+    {#        <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>#}
+{% endblock %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <form role="form" method="post" action="{{ url_for('user.knowledge_graph') }}">
+                <div class="form-group">
+                    <label for=""><span class="glyphicon glyphicon-music"></span> 根据您的个人画像及标签为您推荐如下应用方向</label>
+                    <ul class="dowebok">
+                        <li><input type="radio" name="radio" data-labelauty="NLP应用工程师"></li>
+                        <li><input type="radio" name="radio" data-labelauty="数据分析师"></li>
+                        <li><input type="radio" name="radio" data-labelauty="算法工程师"></li>
+                    </ul>
+                    <button type="submit" class="btn btn-info">查看图谱</button>
+                </div>
+            </form>
+            <form action="{{ url_for('user.knowledge_graph') }}" method="post" role="form">
+                <div class="form-group">
+                    <label for=""><span class="glyphicon glyphicon-music"></span> 您也可以查看您感兴趣的知识图谱</label>
+                    <select name="graph">
+                        <option value="1" selected>机器学习算法工程师</option>
+                        <option value="2">图像处理工程师</option>
+                        <option value="3">NLP应用工程师</option>
+                        <option value="4">AI运维工程师</option>
+                        <option value="5">智能机器人研发工程师</option>
+                        <option value="6">数据分析师</option>
+                        <option value="7">大数据工程师</option>
+                        <option value="4">AI销售员</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-info">查看图谱</button>
+            </form>
+
+            <hr>
+
+            <span style="color:#ccc;">双击节点即可进入相应的知识教程</span>
+            <div class="graph">
+
+            </div>
+
+            <hr>
+            <label for=""><span class="glyphicon glyphicon-music"></span> 职业路径引导</label>
+            <div id="tree" style="width:800px;height:600px;"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+
+        {#        var nodes = [#}
+        {#            {name: "盘锦"},#}
+        {#            {name: "北票"},#}
+        {#            {name: "锦州"},#}
+        {#            {name: "沈阳"},#}
+        {#            {name: "大连"},#}
+        {#            {name: "厦门"},#}
+        {#            {name: "北京"}#}
+        {#        ];#}
+        var nodes = [
+            {% for n in nodes %}
+                {{ n | tojson | safe }} ,
+            {% endfor %}
+        ];
+        {#        var edges = [#}
+        {#            {source: 0, target: 1},#}
+        {#            {source: 0, target: 2},#}
+        {#            {source: 0, target: 3},#}
+        {#            {source: 1, target: 4},#}
+        {#            {source: 1, target: 5},#}
+        {#            {source: 1, target: 6}#}
+        {#        ];#}
+        var edges = [
+            {% for e in edges %}
+                {{ e | tojson | safe }},
+            {% endfor %}
+        ];
+
+        var width = 800,
+            height = 600;
+
+        var svg = d3.select(".graph")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var force = d3.layout.force()
+            .nodes(nodes)
+            .links(edges)
+            .size([width, height])
+            .linkDistance(150)//指定连线长度
+            .charge([-300]);//指定相互之间的作用力
+        //负电荷数
+        //上面的语句定义了力布局方式
+        //并用力布局的方式使得原始数据变成了画力导向图
+        //所需要的数据格式
+        force.start();//开始作用力
+
+        console.log(nodes);
+        console.log(edges);
+
+        //看控制台输出的数据，已经发生了变化
+
+        var color = d3.scale.category20();
+
+        function addclass(i) {
+            i++;
+            return i;
+        }
+        //添加节点
+        var svg_nodes = svg.selectAll("circle")
+            .data(nodes)
+            .enter()
+            .append("circle")
+            .attr("r", 20)
+            .attr("class", function (d, i) {
+                return addclass(i);
+            })
+            .attr("fill", function (d, i) {
+                return color(i);
+            })
+            .call(force.drag);
+        //call使得节点能够被拖拽
+        //添加连线
+        var svg_edges = svg.selectAll("line")
+            .data(edges)
+            .enter()
+            .append("line")
+            .attr("stroke", "#ccc")
+            .attr("stroke-width", 1);
+        //添加文字
+        var svg_texts = svg.selectAll("text")
+            .data(nodes)
+            .enter()
+            .append("text")
+            .attr("fill", "orange")
+            .attr("dx", 20)
+            .attr("dy", 8)
+            .text(function (d) {
+                return d.name;
+            });
+
+        //第一次敲到这儿的时候，我打开网页看了一下效果
+        //本以为会有静态的图，结果是所有东西都聚在了左上角
+        //想想可能是因为上面只是添加了一些元素
+        //指定了一些相对位置以及确定的量
+        //但是具体的元素坐标等还是没有说明
+        //所以需要下面这一段代码
+
+        force.on("tick", function () {
+            svg_edges.attr("x1", function (d) {
+                return d.source.x;
+            })
+                .attr("y1", function (d) {
+                    return d.source.y;
+                })
+                .attr("x2", function (d) {
+                    return d.target.x;
+                })
+                .attr("y2", function (d) {
+                    return d.target.y;
+                });
+
+            svg_nodes.attr("cx", function (d) {
+                return d.x;
+            })
+                .attr("cy", function (d) {
+                    return d.y;
+                });
+
+            svg_texts.attr("x", function (d) {
+                return d.x;
+            })
+                .attr("y", function (d) {
+                    return d.y;
+                });
+        });
+
+        {#        $(".graph").hide();#}
+        //tick：滴答滴答，鼠标触发事件
+        $(".btn").click(function () {
+            $(".graph").show();
+        });
+        $(document).ready(function () {
+            $("circle").dblclick(function () {
+                window.open("http://study.163.com/course/courseMain.htm?courseId=1004336028");
+            });
+        });
+
+        var data1 = {
+            "name": "学习者",
+            "children": [
+                {
+                    "name": "PHP工程师",
+                    "children": [
+                        {"name": "Swoole", "value": 8833},
+                        {"name": "Laravel", "value": 1732},
+                        {"name": "ThinkPHP", "value": 3623}
+                    ]
+                },
+                {
+                    "name": "java工程师",
+                    "children": [
+                        {
+                            "name": "java软件工程师",
+                            "children": [
+                                {
+                                    "name": "管理职位",
+                                    "children": [
+                                        {"name": "研发经理"},
+                                        {"name": "技术经理"},
+                                        {"name": "项目经理"}
+                                    ]
+                                },
+                                {
+                                    "name": "开发岗位",
+                                    "children": [
+                                        {"name": "高级软件工程师"},
+                                        {"name": "需求工程师"},
+
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Android工程师",
+                            "value": 3322
+                        },
+                        {
+                            "name": "算法工程师",
+                            "value": 1257
+                        }
+                    ]
+                },
+                {
+                    "name": "前端工程师",
+                    "children": [
+                        {"name": "vue.js", "value": 4116},
+                        {"name": "react.js", "value": 4231}
+
+                    ]
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('tree'));
+        myChart.setOption(option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            legend: {
+                top: '2%',
+                left: '13%',
+                orient: 'vertical',
+                data: [{
+                    name: '职业引导图',
+                    icon: 'rectangle'
+                }],
+                borderColor: '#c23531'
+            },
+            series: [
+                {
+                    type: 'tree',
+
+                    name: '职业引导图',
+
+                    data: [data1],
+
+                    top: '5%',
+                    left: '15%',
+                    bottom: '2%',
+                    right: '30%',
+
+                    symbolSize: 7,
+
+                    label: {
+                        normal: {
+                            position: 'left',
+                            verticalAlign: 'middle',
+                            align: 'right'
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'right',
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                    expandAndCollapse: false,
+
+                    animationDuration: 550,
+                    animationDurationUpdate: 750
+                }
+            ]
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,194 @@
+{% extends 'bbs/bbs_base.html' %}
+{% import "bbs/paginate.html" as macros %}
+{% import "bbs/article_list_table.html" as list_macros %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/forum.css') }}" charset="utf-8"/>
+{% endblock %}
+{% block content %}
+    <section>
+        <div class="mytop">
+            <div class="logo-btn">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='bbs/images/logo.gif') }}" alt="">
+                </div>
+                <div class="row btn-area1">
+                    <h1>
+                        AIGO
+                    </h1>
+                    <a href="{{ url_for('bbs.index') }}">首页</a>
+                    {% if plate.id == 1 %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}" class="myactive">人工智能</a>
+                    {% else %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}">人工智能</a>
+                    {% endif %}
+                    {% if plate.id == 2 %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=2) }}" class="myactive">分享交流</a>
+                    {% else %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=2) }}">分享交流</a>
+                    {% endif %}
+                    {% if plate.id == 3 %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}" class="myactive">活动专区</a>
+                    {% else %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}">活动专区</a>
+                    {% endif %}
+                    {% if plate.id == 4 %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}" class="myactive">职场招聘</a>
+                    {% else %}
+                        <a href="{{ url_for('bbs.article_list', plate_id=1) }}">职场招聘</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row introduction">
+                <img src="{{ url_for('static', filename='bbs/images/图片1_03.gif') }}" alt="" class="introduction-img" style="display: inline">
+                <p style="display: inline; float: right">
+                    版块介绍：图像识别，是指利用计算机对图像进行处理、分析和理解，以识别各种 不同模式的目标和对像的技术。一般工业使用中，采用工业相机拍摄图片，然后再 利用软件根据图片灰阶差做进一步识别处理。
+                </p>
+                <span class="hoster"> 版主：瑞瑞</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="mainbody">
+            <!-- 上面那个标签分页栏 -->
+            <div class="btn-area2" style="position: relative; height: 45px;">
+                <button name="topic" id="btn1" class="btn mybtn"
+                        style="background-color: white; margin-left: 100px; border-left:1.5px solid #CECECE ;border-right:1.5px solid #CECECE ">
+                    主题
+                </button>
+                <button name="elite" id="btn2" class="btn mybtn" style="margin-left: 250px;">精华</button>
+                <a href="{{ url_for('bbs.post_message') }}">发新帖</a>
+            </div>
+            <!-- 列出文章 -->
+            <div id="list" style=" display:block; ">
+                {{ list_macros.article_list_table(posts,plate=plate,is_moderator=is_moderator) }}
+            </div>
+            <div id="list_elite" style=" display:none; ">
+                {{ list_macros.article_list_table(posts_elite,plate=plate,is_moderator=is_moderator) }}
+            </div>
+        </div>
+
+        <!-- 下面把分页给居中 -->
+        <div class="container">
+            <div id="pager" class="mypager">
+                <div id="page_norm" class="pagination">
+                    {{ macros.pagination_widget(pagination, 'bbs.article_list',plate_id=plate.id) }}
+                </div>
+                <div id="page_elite" class="pagination" style=" display:none; ">
+                    {{ macros.pagination_widget(pagination_elite, 'bbs.article_list',plate_id=plate.id) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+<!-- js代码，主要是ajax -->
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".highlight").click(function () {
+                {% for data in posts %}
+                    if (this.name == "highlight-{{ data.id }}") {
+                        var data = {
+                            'mydata': 'highlight',
+                            'article_id':{{data.id}}
+                        };
+                        this.innerHTML = "<span>取消加精</span>";
+                        this.name = "unhighlight-{{ data.id }}";
+                        location.reload();
+                        alert("加精成功");
+                        $.ajax(
+                            {
+                                type: 'POST',
+                                contentType: 'application/json; charset=UTF-8',
+                                url: "{{ url_for('bbs.article_list', plate_id=plate.id) }}",
+                                data: JSON.stringify(data),
+                                success: function (data) {
+                                }
+                            });
+                    }
+                    else if (this.name == "unhighlight-{{ data.id }}") {
+                        var data = {
+                            'mydata': 'unhighlight',
+                            'article_id':{{data.id}}
+                        };
+                        this.innerHTML = "<span>加为精华</span>";
+                        document.getElementById("highlight-{{ data.id }}").innerHTML = "<span></span>";
+                        this.name = "highlight-{{ data.id }}";
+                        alert("取消加精成功");
+                        location.reload();
+                        $.ajax(
+                            {
+                                type: 'POST',
+                                contentType: 'application/json; charset=UTF-8',
+                                url: "{{ url_for('bbs.article_list', plate_id=plate.id) }}",
+                                data: JSON.stringify(data),
+                                success: function (data) {
+                                }
+                            });
+                    }
+                {% endfor %}
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".delete").click(function () {
+                {% for data in posts %}
+                    if (this.name == "delete-{{data.id }}") {
+                        var data = {
+                            'mydata': 'delete',
+                            'article_id':{{data.id}}
+                        };
+                        document.getElementById("{{ data.id }}").innerHTML = "<span></span>";
+                        $.ajax(
+                            {
+                                type: 'POST',
+                                contentType: 'application/json; charset=UTF-8',
+                                url: "{{ url_for('bbs.article_list', plate_id=plate.id) }}",
+                                data: JSON.stringify(data),
+                                success: function (data) {
+                                }
+                            });
+                    }
+                {% endfor %}
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                $('#btn2').css({
+                    background: '#EBE7E7',
+                });
+                $('#list').show();
+                $('#list_elite').hide();
+                $('#page_norm').show();
+                $('#page_elite').hide();
+                this.style.background = "white";
+                this.style.borderLeft = "1.5px solid #CECECE";
+                this.style.borderRight = "1.5px solid #CECECE";
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#btn2").click(function () {
+                $('#btn1').css({
+                    background: '#EBE7E7',
+                });
+                $('#list').hide();
+                $('#list_elite').show();
+                $('#page_norm').hide();
+                $('#page_elite').show();
+                this.style.background = "white";
+                this.style.borderLeft = "1.5px solid #CECECE";
+                this.style.borderRight = "1.5px solid #CECECE";
+            });
+        });
+    </script>
+
+{% endblock %}

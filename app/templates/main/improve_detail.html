@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <!--  标     志 -->
+
+    <div class="container">
+        <div class="row mylogo">
+            <img src="{{ url_for('static', filename='main/img/logo.gif') }} " alt=""
+                 style="margin-left: 30px;margin-top:2px;float: left;">
+             <h3>AIGO</h3>
+            <h3 style="color: black;margin-left: 30px;font-size: 40px;">demo提升方案</h3>
+        </div>
+    </div>
+   <!-- 主 体 -->
+    <section>
+        <div class="main-body">
+            <!-- 详情文字说明和附件下载那块大的div -->
+            <div class="res-detail">
+                <!-- 可以使用链接，样式设计好了 -->
+               <!--  <a href="" title="">语音识别嘿嘿嘿系统</a> -->
+                <!--   或者使用h3 -->
+                <h2>{{ improve.name }}</h2>
+                <div class="word-discribe">
+                    <p>
+                        {{ improve.description | safe }}
+                    </p>
+                </div>
+                <div class="download">
+                    <a href="{{ url_for('static', filename='uploads/improve/'+user.uuid+'/'+improve.url) }}" title="">附件下载{{ improve.url }}<span class="glyphicon glyphicon-download" style="font-size: 20px;"></span></a>
+                </div>
+            </div>
+            <!-- 右边上面的div -->
+            <div class="company">
+                <table>
+                    <tr>
+                        <td style="width: 80px;">demo来自</td>
+                        <td style="width: 150px;"><a href="" title="">{{improve.find_demo(improve).user.name}}</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width:250px;font-size: 23px; ">
+                            <div class="blue-block">
+                            </div>
+                            <a href="#" title="">
+                                {{improve.find_demo(improve).name}}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 160px;font-size: 15px;"> 已有{{improve.number(improve.find_demo(improve))}}份改进方案</td>
+                        <td style="margin-top: 10px;"><a href="" title="" style="color: #3399ff;font-size: 15px;">了解更多</a></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- 右边下面的div -->
+            <div class="res-from">
+                <h4>方案来自</h4>
+                  {% if improve.user.face %}
+                        <img src="{{ url_for('static', filename='uploads/user/'+improve.user.uuid+'/'+improve.user.face) }}"
+                            >
+                    {% else %}
+                        <img src="holder.js/100x100" >
+                    {% endif %}
+                <a href="{{url_for('user.zone',user_id=improve.user.id )}}" title="">{{ improve.user.name }}</a>
+                <!--   ability拿来放他的能力图或者其他什么ul没给我，我用黑色表示出来的这块 -->
+                <div class="ability">
+                </div>
+            </div>
+        </div>
+        <div class="score">
+            <h3>demo作者审阅</h3>
+            <h3 style="margin-left: 500px;">评分 {{improve.score}}</h3>
+            {%if not improve.score and me!=improve.user%}
+            <div class="remain">
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <div>  代码质量评分：  {{ form.qua_score }}</div>
+
+                        <div> 项目创新评分：  {{ form.cre_score }} </div>
+
+                        <div>  沟通能力评分：  {{ form.com_score }} </div>
+
+                        <div >  文档质量评分：  {{ form.word_score }} </div>
+
+                        <div>  方案总体评分：  {{ form.score }} </div>
+                    </div >
+                    <div style="float:right;margin-top:-220px;">
+                    评价：{{ form.review }}
+                     </div>
+                    <div class="form-group box-footer ">
+                        {{ form.submit(class="btn btn-success col-md-8 col-md-offset-2") }}
+                    </div>
+
+                </form>
+            </div>
+            {%else%}
+            <div class="remain">
+                <div class="container" style="margin-top:40px;">
+
+                    <div style="margin-left:40px;">
+                        <div>  代码质量评分：  <label style="margin-left:30px;">{{ improve.qua_score }}</label></div>
+
+                        <div> 项目创新评分：  <label style="margin-left:30px;">{{ improve.cre_score }}</label> </div>
+
+                        <div>  沟通能力评分：  <label style="margin-left:30px;">{{ improve.com_score }}</label> </div>
+
+                        <div >  文档质量评分：  <label style="margin-left:30px;">{{ improve.word_score }}</label> </div>
+
+                        <div>  方案总体评分：  <label style="margin-left:30px;">{{ improve.score }}</label> </div>
+                      <div class="form-control" style="margin-left:320px;margin-top:-160px;width:300px;height:180px">
+                                        评价：{{ improve.review }}
+                     </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            {%endif%}
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main/css/res-detail.css') }}"/>
+
+    <script src="{{ url_for('static', filename='main/js/res-detail.js') }}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+
+
+{% endblock %}

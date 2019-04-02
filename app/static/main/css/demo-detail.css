@@ -1,0 +1,484 @@
+.mylogo {
+    height: 60px;
+    width: 1100px;
+    margin: 0px auto;
+    margin-top: 60px;
+    background-size: 100%;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+
+}
+
+.mylogo img {
+    height: 50px;
+}
+
+.mylogo p {
+    display: block;
+    float: left;
+    font-size: 45px;
+    color: #3399ff;
+    font-family: SimHei;
+    margin-left: 20px;
+    margin-top: 15px;
+    line-height: 20px;
+}
+
+.demo-show {
+    height: 400px;
+    width: 1100px;
+    background-color: white;
+    margin: 0px auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+
+#show-img {
+    display: block;
+    float: left;
+    margin-left: 40px;
+    margin-top: 30px;
+    width: 400px;
+    height: 350px;
+}
+
+.more-info {
+    float: left;
+    width: 400px;
+    margin-left: 80px;
+    margin-top: 20px;
+    height: 400px;
+}
+
+.more-info p {
+    text-align: center;
+    color: #3399ff;
+    font-size: 30px;
+    width: 600px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.more-info tr {
+    margin-top: 20px;
+}
+
+.more-info td {
+    display: inline-block;
+    font-size: 18px;
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.star {
+    width: 120px;
+    height: 30px;
+    background-color: #cecece;
+    margin-left: 20px;
+    margin-top: 40px;
+    padding: 0px;
+}
+
+.collect {
+    background-color: white;
+    width: 40px;
+    height: 28px;
+    border: none;
+    margin-top: 1px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.star h4 {
+    display: block;
+    float: right;
+    height: 28px;
+    margin: 0px auto;
+    width: 70px;
+    line-height: 28px;
+}
+
+.no-interset {
+    display: block;
+    float: left;
+    color: black;
+    width: 80px;
+    margin-top: -25px;
+    margin-left: 150px;
+}
+
+.star a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.star a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+
+.star a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+
+.to-money-author {
+    margin-top: 70px;
+    width: 310px;
+    height: 100px;
+}
+
+.to-money-author a {
+    margin-top: -50px;
+    display: block;
+    float: left;
+    margin-left: 10px;
+    width: 140px;
+    height: 60px;
+    border-radius: 8px;
+    background-color: rgb(173, 214, 255);
+    line-height: 60px;
+    text-align: center;
+    font-size: 30px;
+    color: black;
+}
+
+.to-money-author a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.to-money-author a:hover {
+    color: #999999;
+    text-decoration: none;
+}
+
+.demo-detail {
+    height: 600px;
+    width: 1100px;
+    background-color: white;
+    margin: 20px auto 20px auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+
+}
+
+.resolve-detail {
+    height: 600px;
+    width: 1100px;
+    background-color: white;
+    margin: 20px auto 20px auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+
+}
+
+
+.change {
+    width: 1000px;
+    height: 40px;
+    border-bottom: 1px solid #cecece;
+}
+
+.change button {
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.my-active {
+    color: white;
+    background-color: #3399ff;
+}
+
+/*详情*/
+.info-dd {
+    height: 550px;
+    margin-left: 10px;
+}
+
+.info-detail {
+    height: 510px;
+    margin-top: 5px;
+    text-indent: 2em;
+    overflow: auto;
+}
+
+/*评论*/
+.reply-area {
+    width: 1100px;
+    margin: 0px auto;
+    margin-top: 10px;
+    background-color: rgb(249, 248, 248);
+
+}
+
+.reply-word p {
+    display: block;
+    font-size: 25px;
+    margin-left: 0px;
+    width: 530px;
+    overflow: hidden;
+
+}
+
+a .avatar-small {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.name {
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+
+.function {
+    height: 30px;
+    margin-left: -100px;
+}
+
+.function a {
+
+    color: rgb(206, 206, 206);
+    display: inline-block;
+
+}
+
+.function a:hover {
+    background-color: inherit;
+    text-decoration: underline;
+}
+
+.function button {
+    outline: none;
+    border: none;
+    background-color: inherit;
+    margin-right: 40px;
+}
+
+text {
+    color: rgb(206, 206, 206);
+    margin-left: 10px;
+
+}
+
+.comment-reply {
+    height: 550px;
+    overflow: hidden;
+}
+
+.mytext {
+    width: 33em;
+    border: 2px solid #08DEF9;
+    font-size: 15px;
+    margin-left: 50px;
+    float: left;
+}
+
+.write input {
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    background-color: #3399ff;
+    margin-left: 10px;
+    float: left;
+}
+
+footer {
+	font-weight: 400;
+	text-align: center;
+	padding: 20px;
+	background-color: #eeeeee;
+
+
+}
+
+/*以下为 解决方案的div*/
+
+.blue-block {
+    background-color: #3399ff;
+    height: 40px;
+    width: 10px;
+    margin-top: 10px;
+    float: left;
+}
+
+.res-item {
+    height: 60px;
+    width: 1100px;
+    margin: 0px auto;
+    background-color: #cecece;
+    border-radius: 10px;
+    box-shadow: 0px 0px 7px rgba(83, 83, 83, 3);
+    margin-top: 40px;
+}
+
+
+/*每个demand以及匹配到的demo*/
+.demand-div {
+   height: 600px;
+    width: 1100px;
+    background-color: white;
+    margin: 0px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+    overflow:auto;
+
+}
+/*放每个匹配到的demo*/
+.res-div {
+    height: auto;
+    width: 1100px;
+    overflow: auto;
+}
+
+.demand-name {
+    height: 55px;
+    width:1000px;
+    margin: 0px auto;
+    margin-bottom:20px;
+    background-color: white;
+    border-bottom: 1.5px solid #cecece;
+}
+
+.demand-name a {
+    margin-left: 20px;
+    font-size: 40px;
+}
+
+
+
+/*以下为 匹配到的demo*/
+
+.blue-block {
+    background-color: #3399ff;
+    height: 20px;
+    width: 7px;
+    margin-top: 10px;
+    float: left;
+}
+
+.res-item {
+    height: 40px;
+    width: 1000px;
+    margin: 2px auto;
+    margin-top:20px;
+     border-radius: 0px;
+    background-color: white;
+    border-bottom: 1.5px solid #cecece;
+}
+
+
+
+
+/*demo方案的链接*/
+
+.res-name {
+    float: left;
+    margin-top: 5px;
+    display: block;
+    height: 30px;
+    width: 270px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+/*demo的作者*/
+.from {
+    float: left;
+    width: 160px;
+    height: 30px;
+    padding: 0px;
+}
+
+.from h5 {
+    width: 30px;
+    display: inline-block;
+}
+
+.from a {
+    width: 130px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+/*。。。。。。。。。。。。。。。。。。。。。*/
+
+.score-time {
+    float: right;
+    width: 160px;
+    height: 30px;
+    padding: 0px;
+}
+
+
+
+
+/*评分*/
+
+.score-time h3 {
+    height: 23px;
+    width: 160px;
+    display: inline-block;
+    margin-top: -2px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 25px;
+    border-bottom: 1px solid white;
+}
+
+
+
+
+/*发布时间*/
+
+.score-time h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 160px;
+    height: 14px;
+    line-height: 15px;
+}
+
+
+
+
+/*解决方案结束*

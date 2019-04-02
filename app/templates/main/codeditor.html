@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!-- 核心文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/lib/codemirror.css') }}">
+    <script src="{{ url_for('static', filename='codemirror/lib/codemirror.js') }}"></script>
+    <!-- 主题文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/theme/seti.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/theme/3024-night.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/theme/erlang-dark.css') }}">
+    <!--代码高亮必须引入-->
+    <script src="{{ url_for('static', filename='codemirror/mode/clike/clike.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/python/python.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/perl/perl.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/mode/shell/shell.js') }}"></script>
+
+
+    <!--支持代码折叠-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/addon/fold/foldgutter.css') }}"/>
+    <script src="{{ url_for('static', filename='codemirror/addon/fold/foldcode.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/addon/fold/foldgutter.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/addon/fold/brace-fold.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/addon/fold/comment-fold.js') }}"></script>
+
+    <!--全屏模式-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/addon/display/fullscreen.css') }}">
+    <script src="{{ url_for('static', filename='codemirror/addon/display/fullscreen.js') }}"></script>
+
+    <!--括号匹配-->
+    <script src="{{ url_for('static', filename='codemirror/addon/edit/matchbrackets.js') }}"></script>
+
+    <!--自动补全-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='codemirror/addon/hint/show-hint.css') }}">
+    <script src="{{ url_for('static', filename='codemirror/addon/hint/show-hint.js') }}"></script>
+    <script src="{{ url_for('static', filename='codemirror/addon/hint/anyword-hint.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/css/codeditor.css') }}">
+    <title>codeditor</title>
+</head>
+
+<body>
+<!--广告条-->
+<div id="ad-header"><a href="http://localhost:8888/?token=b77155bf278558905a6b575b3e8c36be5babb1ac6b9beec7" target="_blank">提示：开通会员以使用更专业的Jupyter Notebook。</a>
+    <a href="http://www.baidu.com" target="_blank">了解更多</a>
+    <p id="cross">×</p>
+    <a class="btn" href="{{ url_for('main.index') }}">返回</a>
+</div>
+
+<!--选择脚本编码代码-->
+<div class="controls" style="padding-left:10px; padding:10px; background: rgb(50,50,50);">
+    <input class="ck-code" type="radio" name="script_once_type" id="script_once_type1"> <span
+        style="color: white">shell</span>
+    <input class="ck-code" type="radio" name="script_once_type" id="script_once_type2"> <span
+        style="color: white">bat</span>
+    <input class="ck-code" type="radio" name="script_once_type" id="script_once_type3" checked> <span
+        style="color: white">python</span>
+    <select id="select" style="height:24px; float:right; margin-top: -2px; margin-right:-10px;">
+        <option>default</option>
+        <option selected>seti</option>
+        <option>erlang-dark</option>
+    </select>
+    <span style="float:right; margin-right:8px; color:white;">配色风格</span>
+</div>
+
+<form role="form" method="post" action="{{ url_for('main.codeditor') }}">
+    {{ form.code }}
+
+    <div style="display: block;">
+        <div style="float: left; color: white; size: 18px">
+            {{ form.test.label }}
+        </div>
+        <div style="float:left;">
+            {{ form.test }}
+        </div>
+
+    </div>
+    {{ form.submit }}
+    {{ form.csrf_token }}
+</form>
+
+<div style="margin: 25px 0px;">
+    <form role="form" method="post">
+        <label for="#" style="color: white;">选择需要<br>测试的指标</label>
+        <select name="type">
+            <option value="分类问题">分类问题</option>
+            <option value="智能信息检索">智能信息检索</option>
+            <option value="模式识别">模式识别</option>
+            <option value="深度学习">深度学习</option>
+            <option value="推荐系统">推荐系统</option>
+        </select>
+
+        <select name="dtype">
+            <option value="准确度">准确度</option>
+            <option value="覆盖率">覆盖率</option>
+            <option value="新颖性">新颖性</option>
+            <option value="多样性">多样性</option>
+            <option value="流行度">流行度</option>
+        </select>
+
+        <label for="#" style="color: white;display: inline;" >输入测试的数据</label>
+        <input type="text" style="width: 500px;" name="text">
+
+        <input class="btn btn-default" id="btn-submit" style="display: inline;" name="submit" type="submit" value="测试">
+    </form>
+</div>
+
+
+
+
+{#    <div style="float: left">#}
+{#        <span>{{ form.test.label }}</span>#}
+{#        <span>{{ form.test }}</span>#}
+{#    </div>#}
+
+    <div>
+        <span style="display:block; width:100%; padding:10px; padding-left:18px; color:white; background:rgb(50,50,50);">输出信息</span>
+        <div>
+            {% if result %}
+                {% if result.output %}
+                    <textarea readonly="readonly"
+                              style="width:100%; height:250px; background:rgb(200,200,200); color:rgb(30,30,30); cursor:text;">{{ result.output | safe }}</textarea>
+                {% endif %}
+            {% else %}
+                <textarea readonly="readonly" style="width:100%; height:250px; background:rgb(200,200,200); color:rgb(30,30,30); cursor:text;">&gt;&gt;&gt;AIGO在线运行平台 alpha 版本1.0</textarea>
+            {% endif %}
+        </div>
+    </div>
+    <p id="status-bar">状态：未运行代码。</p>
+
+    {#    <div>#}
+    {#        <span>{{ form.test.label }}</span>#}
+    {#        <span>{{ form.test }}</span>#}
+    {#    </div>#}
+    {#    {{ form.submit }}#}
+    {#    <div>#}
+    {#        <span>运行结果</span>#}
+    {#        <div>#}
+    {#            {% if result %}#}
+    {#                {% if result.output %}#}
+    {#                    {{ result.output | safe }}#}
+    {#                {% endif %}#}
+    {##}
+    {#            {% endif %}#}
+    {#        </div>#}
+    {#    </div>#}
+</body>
+<script type="text/javascript">
+    //根据DOM元素的id构造出一个编辑器
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "text/x-python", //实现python代码高亮
+        lineNumbers: true,
+        //设置主题
+        theme: "seti",
+        //显示行号
+        lineNumbers: true,
+
+        //代码折叠
+        lineWrapping: true,
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+
+        //全屏模式
+        fullScreen: false,
+
+        //括号匹配
+        matchBrackets: true,
+
+        //智能提示
+        extraKeys: {
+            "Tab": "autocomplete"
+        } //ctrl-space唤起智能提示
+    });
+
+    $('#select').change(function () {
+        var theme = $('#select').val();
+        editor.setOption("theme", theme); //editor.setOption()为codeMirror提供的设置风格的方法
+    });
+
+    //选择脚本类型JS
+    var txt1 = $("#script_once_code").val();
+    var txt2 = '';
+    var txt3 = $("#code2").val();
+    $(".ck-code").click(function () {
+        var txt = editor.getValue(); //editor.getValue()获取textarea中的值
+        var lang = $(this).prop("id");
+        if (lang == "script_once_type1") {
+            editor.setOption("mode", "shell"); //editor.setOption()设置脚本类型
+            editor.setValue(txt1); // editor.setValue()设置textarea中的值
+        } else if (lang == "script_once_type2") {
+            editor.setOption("mode", "perl");
+            editor.setValue(txt2);
+        } else {
+            editor.setOption("mode", "python");
+            editor.setValue(txt3);
+        }
+    });
+</script>
+
+</html>

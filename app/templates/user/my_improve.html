@@ -1,0 +1,54 @@
+{% extends 'user/menu.html' %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="myright">
+                <div class="R-top">
+                    <p>
+                        <b>我的改进方案</b>
+                    </p>
+                </div>
+                <div class="R-bottom">
+                    {% for data in user.improves %}
+                        <div class="res-item">
+                            <div class="blue-block">
+                            </div>
+                            <a href="{{ url_for('main.improve_detail', id=data.id) }}" title="" class="res-name">
+                                {{ data.name }}
+                            </a>
+                            <div class="demo-info">
+                                <table>
+                                    <tr>
+                                        <td>demo名称</td>
+                                        <td>
+                                            <a href="{{ url_for('main.demo_detail', id=data.find_demo(data).id,page=-1) }}"
+                                               title="">{{ data.find_demo(data).name }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户名称</td>
+                                        <td>
+                                            <a href="{{ url_for('enterprise.zone', enterprise_id=data.find_demo(data).user.id) }}"
+                                               title="">{{ data.find_demo(data).user.name }}</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="score-time">
+                                <h3>
+                                    评分 &nbsp;&nbsp;{{ data.score }}
+                                </h3>
+                                <h5>
+                                    {{ data.addtime }}
+                                </h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'enterprise/menu.html' %}
+
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='enterprise/css/company.css') }}"/>
+{% endblock %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="myright">
+                <div class="R-top">
+                    <p>
+                        <b>需求解决方案</b>
+                    </p>
+                </div>
+                <div class="R-bottom">
+                    {% for data in user.demands %}
+                        <div class="demand-div">
+                            <!--   需求的名字 -->
+                            <div class="demand-name">
+                                <a href="{{ url_for('main.demand_detail', id=data.id,page=-1) }}"
+                                   title="">{{ data.name }}</a>
+                            </div>
+                            <!--   放匹配到的demo的div -->
+                            <div class="item-div">
+                                {% for data1 in data.demand_resolves %}
+                                    <!--  每条匹配到的demo -->
+                                    <div class="res-item">
+                                        <div class="blue-block">
+                                        </div>
+                                        <a href="{{ url_for('main.resolve_detail', id=data1.id) }}" title=""
+                                           class="res-name">
+                                            {{ data1.name }}
+                                        </a>
+                                        <div class="from">
+                                            <h5>来自</h5>
+                                            <a href="" title="">{{ data1.user.name }}</a>
+                                        </div>
+                                        <div class="score-time">
+                                            <h3>
+                                                评分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ data1.score }}
+                                            </h3>
+                                            <h5>
+                                                {{ data1.addtime }}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

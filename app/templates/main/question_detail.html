@@ -1,0 +1,234 @@
+{% extends 'base/base.html' %}
+{% import "bbs/paginate.html" as macros %}
+{% import "main/little_reply.html" as lr_macros %}
+{% block content %}
+    <!--  标     志 -->
+
+    <div class="container">
+        <div class="row mylogo">
+            <img src="{{ url_for('static', filename='main/img/logo.gif') }} " alt=""
+                 style="margin-left: 30px;margin-top:2px;float: left;">
+            <p>AIGO</p>
+            <p style="color: black;margin-left: 30px;font-size: 40px;">demo展示</p>
+        </div>
+    </div>
+    <!-- 主 题 展 示 -->
+    <section>
+        <div class="container">
+            <div class="row demo-show">
+                <img id="show-img" src="# " alt="">
+                <div class="more-info">
+                    <p>
+                        入门教程
+                    </p>
+                    <table style="margin-top: 20px;">
+                        <tr>
+                            <td>
+                                发布者：
+                            </td>
+                            <td>
+                                <a href="#"> 平台方</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                发布时间：
+                            </td>
+                            <td>
+                                2018-4-7
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                完成人数：
+                            </td>
+                            <td>
+                                1501人
+                            </td>
+                        </tr>
+                    </table>
+                    <!--  星星标记和不感兴趣 -->
+                    <div class="star">
+{#                        {% if not me.has_democol(demo) %}#}
+{#                            <button class="collect" style="color: black;">#}
+{#                                <span class="glyphicon glyphicon-star-empty" style="font-size: 25px;"></span>#}
+{#                            </button>#}
+{#                        {% else %}#}
+                            <span> 相似题目推荐</span>
+
+{#                        {% endif %}#}
+{#                        <h4>{{ demo.col_number(demo) }}</h4>#}
+                        <a href="#" class="no-interset" style="width: 200px;">
+                            基于k-近邻的简单分类算法
+                        </a>
+                    </div>
+
+                    <!--  众筹 -->
+                    <div class="to-money-author">
+                        <a href="{{ url_for('main.codeditor') }}" target="_blank" style="font-size: 20px;line-height:30px;" class="cfunding">
+                            进行实战演练
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--   选择详情或者评论 按钮切换已经完成 -->
+            <div class="demo-detail">
+                <div class="change">
+                    <button style="margin-left: 50px;" class="my-active" id="detail">
+                        问题详情
+                    </button>
+                    <button id="comment">
+                        评论
+                    </button>
+                </div>
+                <!-- 详情的div -->
+                <div class="info-dd">
+                    <div class="info-detail">
+
+                        <p>
+                            这是一个了解平台的任务，只要按照如下步骤操作，即可完成
+                        </p>
+                    </div>
+
+                    <a href="#" style="margin-left:20px;margin-bottom:20px;">附件下载</a>
+                </div>
+
+
+                <!-- 评论的div -->
+                <div class="comment-dd" style="display: none;">
+                    <div class="comment-reply">
+                        <div class="reply-area">
+{#                                {% for data in page_reviews %}#}
+{#                                {%if data.is_user(data) %}#}
+{#                                    <div>#}
+{#                                        <div class="main-article2" id="{{ data.id }}" style="width:1050px;">#}
+{#                                            <a href="" class="users">#}
+{#                                                <img src=""#}
+{#                                                     alt="" class="avatar"></a>#}
+{#                                            <!-- 回复者的网名 -->#}
+{#                                            <p class="name-p">{{ data.if_is_user.name }}</p>#}
+{#                                            <div style="clear: both;"></div>#}
+{#                                            <div class="score" style="margin-left:10px;">#}
+{#                                                评分:&nbsp;{{ data.star }}#}
+{#                                            </div>#}
+{#                                            <div class="word">#}
+{##}
+{#                                                <!-- 大回复内容 -->#}
+{#                                                <p>#}
+{#                                                    {{ data.description | safe }}#}
+{#                                                </p>#}
+{#                                                <!-- 这是加图片的 -->#}
+{#                                                <img src="" alt="">#}
+{##}
+{#                                                <div class=" container function">#}
+{#                                                    <!-- 判断是否有权限 -->#}
+{#                                                    <a href="#">举报</a>#}
+{#                                                    <text>{{ data.addtime }}</text>#}
+{#                                                    <button class="users-reply-btn" onclick="reply(this)"> 回复</button>#}
+{#                                                    {% if my_id==data.if_is_user_id or my_id == demo.user_id %}#}
+{#                                                        <button class="delete" name="delete-{{ data.id }}">#}
+{#                                                            <span>删除评论</span></button>#}
+{#                                                    {% endif %}#}
+{#                                                </div>#}
+{#                                                <!--  这里是列出所有小回复 -->#}
+{#                                                {{ lr_macros.little_reply(reviews,data,is_user) }}#}
+{#                                            </div>#}
+{#                                            <div style="clear: both;"></div>#}
+{#                                        </div>#}
+{#                                        <div style="clear: both;"></div>#}
+{#                                    </div>#}
+{#                                {%else%}#}
+{#                                        <div>#}
+{#                                        <div class="main-article2" id="{{ data.id }}" style="width:1050px;">#}
+{#                                            <a href="" class="users">#}
+{#                                                <img src=""#}
+{#                                                     alt="" class="avatar"></a>#}
+{#                                            <!-- 回复者的网名 -->#}
+{#                                            <p class="name-p">{{ data.if_is_enterprise.name }}</p>#}
+{#                                            <div style="clear: both;"></div>#}
+{#                                            <div class="score" style="margin-left:10px;">#}
+{#                                                评分:&nbsp;{{ data.star }}#}
+{#                                            </div>#}
+{#                                            <div class="word">#}
+{##}
+{#                                                <!-- 大回复内容 -->#}
+{#                                                <p>#}
+{#                                                    {{ data.description | safe }}#}
+{#                                                </p>#}
+{#                                                <!-- 这是加图片的 -->#}
+{#                                                <img src="" alt="">#}
+{##}
+{#                                                <div class=" container function">#}
+{#                                                    <!-- 判断是否有权限 -->#}
+{#                                                    <a href="#">举报</a>#}
+{#                                                    <text>{{ data.addtime }}</text>#}
+{#                                                    <button class="users-reply-btn" onclick="reply(this)"> 回复</button>#}
+{#                                                    {% if my_id==data.if_is_enterprise_id or my_id == demo.user_id %}#}
+{#                                                        <button class="delete" name="delete-{{ data.id }}">#}
+{#                                                            <span>删除评论</span></button>#}
+{#                                                    {% endif %}#}
+{#                                                </div>#}
+{#                                                <!--  这里是列出所有小回复 -->#}
+{#                                                {{ lr_macros.little_reply(reviews,data,is_user) }}#}
+{#                                            </div>#}
+{#                                            <div style="clear: both;"></div>#}
+{#                                        </div>#}
+{#                                        <div style="clear: both;"></div>#}
+{#                                    </div>#}
+{#                                 {% endif %}#}
+{#                                {% endfor %}#}
+
+
+{#                            <div class="container" style="width:500px;">#}
+{#                                <div id="pager" class="mypager">#}
+{#                                    <div class="pagination">#}
+{#                                        {{ macros.pagination_widget(pagination, 'main.demo_detail', id=demo.id) }}#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reply-hoster" id="reply" style="display:none">
+                <p style="font-size:25px;color: #3399ff;margin-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请评论:</p>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div>
+                        <label>&nbsp;  代码质量评分： </label>
+                        {{ form.qua_score }}
+                        <label style="margin-left:10px">&nbsp;  项目创新评分： </label>
+                        {{ form.cre_score }}
+                        <label style="margin-left:10px">&nbsp;  demo总体评分： </label>
+                        {{ form.score }}
+                    </div>
+                    <div class="form-group" style="margin-top:10px">
+                        {{ form.ckdemo(class='ckeditor') }}
+                        <script type="text/javascript">
+                            CKEDITOR.replace("ckdemo", {
+                                filebrowserUploadUrl: '/upcomment/'
+                            });
+                        </script>
+                    </div>
+                    <div class="form-group box-footer ">
+                        {{ form.submit(class="btn btn-success col-md-8 col-md-offset-2") }}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main/css/demo-detail.css') }}"/>
+
+    <script src="{{ url_for('static', filename='main/js/demo-detail.js') }}"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+{% endblock %}

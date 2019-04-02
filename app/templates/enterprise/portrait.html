@@ -1,0 +1,67 @@
+{% extends 'enterprise/menu.html' %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+{% endblock %}
+
+{% block builtin %}
+    <div class="row" >
+
+        <div class="col-md-6">
+
+                <div class="panel-body">
+                    <form role="form" method="post" action="{{ url_for('enterprise.portrait') }}">
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-music"></span> 我感兴趣的标签</label>
+
+                            <ul class="dowebok">
+                                {% for tag in tags %}
+                                    <li><input type="checkbox" name="{{ tag.id }}"
+                                               data-labelauty={{ tag.name }}></li>
+                                {% endfor %}
+                                {% for tag in my_tags %}
+                                    <li><input type="checkbox" name="{{ tag.id }}"
+                                               data-labelauty={{ tag.name }} checked></li>
+                                {% endfor %}
+                            </ul>
+                            <button type="submit" class="btn btn-info">修改</button>
+                        </div>
+                    </form>
+
+                </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='datepicker/bootstrap-datetimepicker.min.js') }}" charset="UTF-8"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('description', {
+            {#        开启上传功能，配置上传路径#}
+            filebrowserUploadUrl: '/demandupload/'
+        });
+    </script>
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% macro little_reply(reviews,big_review,is_user) %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bbs/css/forum-article.css') }}"
+          charset="utf-8"/>
+    <!-- 如果不是版主，下面不用看 -->
+
+    <!-- 这里开始看 -->
+
+        <!-- 如果是大评论 -->
+        {% for data in reviews if data.is_big==False %}
+            <!-- 如果大评论有小评论 -->
+            {% if data.is_discussing(big_review) %}
+             {%if data.is_user(data) %}
+                <div class="reply-div" id="{{ data.id }}">
+                    <div class="reply-area">
+                        <a href="" class="users-small">
+                            <img src=""
+                                 alt="" class="avatar-small"></a>
+                        <div class="name">
+                            {{ data.if_is_user.name | safe }}
+                        </div>
+                        <div style="clear:both;">
+
+                        </div>
+                        <div class="reply-word" style="font-size:10px;">
+                            <p> {{ data.description | safe }}</p>
+                        </div>
+                        <div class="function">
+                            <text style="margin-left:100px;">{{ data.addtime }}</text>
+                            <button class="delete" name="delete-{{ data.id }}" style="margin-left:130px;">
+                                <span>删除评论</span></button>
+                            <button class="div-reply-btn" onclick="toreply(this)"> 回复</button>
+                            <!-- 点击按钮列出小评论 -->
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            {%else%}
+                <div class="reply-div" id="{{ data.id }}">
+                    <div class="reply-area">
+                        <a href="" class="users-small">
+                            <img src=""
+                                 alt="" class="avatar-small"></a>
+                        <div class="name">
+                            {{ data.if_is_enterprise.name | safe }}
+                        </div>
+                        <div style="clear:both;">
+
+                        </div>
+                        <div class="reply-word" style="font-size:10px;">
+                            <p> {{ data.description | safe }}</p>
+                        </div>
+                        <div class="function">
+                            <text style="margin-left:100px;">{{ data.addtime }}</text>
+                            <button class="delete" name="delete-{{ data.id }}" style="margin-left:130px;">
+                                <span>删除评论</span></button>
+                            <button class="div-reply-btn" onclick="toreply(this)"> 回复</button>
+                            <!-- 点击按钮列出小评论 -->
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+        <!-- 回复框 -->
+        <div class="write" style="display:none">
+                   <textarea name="" id="inputarea-{{ big_review.id }}" cols="30" rows="6" class="mytext ">
+                   </textarea>
+
+            <button class="small_reply_btn" name="review-{{ big_review.id }}" style="margin-left:480px">
+                <span>发表</span>
+            </button>
+
+        </div>
+
+
+
+    <script>
+        function reply(obj) {
+            $(obj).parent().parent().children('.reply-div').toggle();
+            if ($(obj).text() == ' 回复') {
+                obj.innerHTML = '收起回复';
+                $(obj).parent().parent().children(".write").show();
+
+            } else {
+                obj.innerHTML = ' 回复';
+                $(obj).parent().parent().children(".write").hide();
+            }
+            $(obj).parent().parent().children('.reply-div').children('.write').children('textarea').val('');
+        }
+
+        function toreply(obj) {
+            var text = $(obj).parent().parent().children('.name').text();
+            var review_con = $(obj).parent().parent().children('.reply-word').text();
+            $("#inputarea-{{big_review.id}}").val('回复' + text + ':' + review_con + "----------------------\n");
+        }
+    </script>
+{% endmacro %}

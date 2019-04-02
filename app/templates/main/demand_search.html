@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% import "ui/main_page.html" as pg %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main/css/demand_list.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div style="background-color: rgb(231,231,231);">
+        <!--  标     志 -->
+        <div class="mylogo">
+            <img src="{{ url_for('static', filename='main/img/logo_03.gif') }}" alt=""
+                 style="margin-left: 20px;margin-top: 10px;float: left;">
+            <h3>AIGO</h3>
+            <h3 style="color: black;margin-left: 50px;font-size: 50px;">需求搜索</h3>
+        </div>
+
+        <!-- 主 题 展 示 -->
+        <section>
+            <div class="demo-show-main">
+                <div class="labelbox">
+                    <h4 class="checkbox-h4"></h4>
+                </div>
+                <div class="sort">
+                    <h4 style="line-height: 8px;font-size: 18px;margin-left: 15px;">排序</h4>
+                    <button id='b1' class="btn my-btn-nor" onclick="change(this)">智能排序</button>
+                    <button id='b2' class="btn my-btn-nor" onclick="change(this)">demo来自</button>
+                    <button id='b3' class="btn my-btn-nor" onclick="change(this)">发布时间<span
+                            class="glyphicon glyphicon-arrow-up"></span></button>
+                    <button id='b4' class="btn my-btn-nor" onclick="change(this)">star数<span
+                            class="glyphicon glyphicon-arrow-up"></span></button>
+
+                    {# <button type="submit" class="btn my-btn-search">筛选</button> #}
+                </div>
+                <div>
+                    {% for v in page_data.items %}
+                        <div class="demo-show">
+                            <div class="number">
+                                <a class="be-block" href="{{ url_for("main.demand_detail", id=v.id) }}">{{ v.name }}</a>
+                                <br>
+                                <h5>编号 {{ v.id }}</h5>
+                            </div>
+                            <div class="time">
+                                <h5 style="margin-top: 10px;">发布者 {{ v.enterprise.name }}</h5>
+                                <h5>demo来自 用户</h5>
+                                <h5>发布时间 {{ v.addtime }}</h5>
+                            </div>
+                            <div class="collection">
+                                <button style="background-color: white;border: none;color: black;"
+                                        onclick="clickchange(this)"><span class="glyphicon glyphicon-star-empty"
+                                                                          style="font-size: 30px;"></span></button>
+                                <h5>{{ v.star }}</h5>
+                            </div>
+                            <div class="label-show">
+                                标签
+                                {% for tag in v.tags %}
+                                    <span class="label label-primary">{{ tag.name }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="demo-show" style="border-bottom: none">
+                        {{ pg.page(page_data, 'main.demand_list') }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='main/js/demand_list.js') }}" type="text/javascript" charset="utf-8"
+            async defer></script>
+{% endblock %}

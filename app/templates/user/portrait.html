@@ -1,0 +1,86 @@
+{% extends 'user/menu.html' %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='echart/echarts.min.js') }}"></script>
+    {#    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts-gl.js"></script>#}
+
+    {#        <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>#}
+    {#        <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>#}
+    {#        <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>#}
+{% endblock %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9">
+            <div class="panel-body">
+                <div style="display: inline-block">
+                    {{ myechart|safe }}
+                </div>
+
+                <form role="form" method="post" style="display: inline-block">
+                    <div style="display: inline-block">
+                        {{ form.select }}
+                        <br>
+                        <span>{{ form.submit }}</span>
+                    </div>
+                </form>
+
+                <hr>
+
+                <div class="form-group">
+                        <label for=""><span
+                                class="glyphicon glyphicon-music"></span> 未来画像</label>
+                </div>
+                <div style="display: inline-block">
+                    {{ myechart1|safe }}
+                </div>
+
+                <hr>
+
+                <form role="form" method="post" action="{{ url_for('user.portrait') }}">
+                    <div class="form-group">
+                        <label for=""><span
+                                class="glyphicon glyphicon-music"></span> 我感兴趣的标签</label>
+
+                        <ul class="dowebok">
+                            {% for tag in tags %}
+                                <li><input type="checkbox" name="{{ tag.id }}"
+                                           data-labelauty={{ tag.name }}></li>
+                            {% endfor %}
+                            {% for tag in my_tags %}
+                                <li><input type="checkbox" name="{{ tag.id }}"
+                                           data-labelauty={{ tag.name }} checked></li>
+                            {% endfor %}
+                        </ul>
+                        <button type="submit" class="btn btn-info">修改</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+        });
+    </script>
+{% endblock %}

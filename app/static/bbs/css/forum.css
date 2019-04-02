@@ -1,0 +1,207 @@
+.mytop {
+    height: 240px;
+    width: 1100px;
+    margin: 0px auto;
+    margin-top: 51px;
+    background-color: white;
+}
+
+.logo-btn {
+    height: 100px;
+    width: 1100px;
+    padding: 0px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.btn-area1 {
+    width: 980px;
+    height: 80px;
+    border-bottom: 3px solid #359AFF;
+    float: left;
+}
+
+h1 {
+    display: block;
+    float: left;
+    font-size: 55px;
+    font-family: SimHei;
+}
+
+.btn-area1 a {
+    width: 120px;
+    height: 40px;
+    display: block;
+    float: left;
+    margin-left: 40px;
+    margin-top: 39px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 50px;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    background-color: #3399ff;
+    color: white;
+}
+
+a.myactive{
+
+    background-color: #3399ff;
+    color: white;
+}
+.introduction{
+	margin: 0px auto;
+	background-color: rgb(235,231,231);
+	height: 130px;
+	width: 900px;
+	padding: 0px;
+}
+.introduction-img{
+	display:block;
+	float: left;
+	width: 200px;
+	height: 110px;
+	margin-top: 12px;
+	margin-left: 12px;
+}
+.introduction p{
+	display: block;
+	float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+	color: #3399ff;
+	width: 40em;
+	letter-spacing: 1px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.hoster{
+	display: block;
+	width: 40em;
+	height: 30px;
+	margin-left: 230px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.mainbody{
+	width: 1100px;
+	margin: 0px auto;
+	margin-top: 20px;
+	background-color: white;
+}
+.mybtn{
+	border-radius: 0px;
+	height: 45px;
+	width: 65px;
+	font-size: 20px;
+	text-align: center;
+	border-top: 2px solid #3399ff;
+	background-color:#EBE7E7;
+	position: absolute;
+}
+
+.btn-area2>button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.mainbody a{
+	display: block;
+	float: right;
+	color: black;
+	font-size: 22px;
+	margin-right: 70px;
+	margin-top: 10px;
+}
+.article{
+	width:1000px;
+	height: 50px;
+	margin: 0px auto;
+	border-top: 2px solid #cecece; 
+}
+.article a{
+	display: block;
+	float: left;
+	width: 14em;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: 45px;
+	font-size: 20px;
+	color: #3399ff;
+}
+.article a:hover{
+	background-color: inherit;
+	text-decoration: underline;
+	}
+.author{
+	display: block;
+	float: left;
+	margin-left: 10px;
+	margin-top: 25px;
+    color: rgb(204,204,204);
+}
+.review{
+    overflow: hidden;
+    margin-top:25px;
+}
+.article img{
+       float: right;
+       margin-right: 150px;
+       margin-top: 10px;
+	height: 40px;
+}
+text{
+	position: absolute;
+	margin-left: 15vh;
+	margin-top: 17px;
+}
+
+.hoster-fun{
+   display:block;
+   position:relative;
+   float:right;
+   height:70px;
+   margin-right: 110px;
+   margin-top: -44px;
+
+}
+
+.btn1,.btn2{
+   margin-top: 4px;
+}
+
+.mypager{
+text-align: center;
+}
+
+.pagination{
+margin-left: auto;
+margin-right: auto;
+}
+.myfoot{
+	margin-top: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 20px;
+	color: white;
+	background-color: #ACAAAA;
+}
+.footleft{
+	height: 40px;
+	margin-left: 10%;
+	float: left;
+}
+.footright{
+	height: 40px;
+	margin-right: 10%;
+	float: right;
+}

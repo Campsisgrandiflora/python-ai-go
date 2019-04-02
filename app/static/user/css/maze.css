@@ -1,0 +1,128 @@
+.maze {
+    width: 480px;
+    height: 250px;
+    position: relative;
+    padding: 0px;
+}
+
+.mazeb {
+    width: 80px;
+    height: 60px;
+    float: left;
+    background-size: 80px 60px;
+    -moz-background-size: 80px 60px;
+    -moz-background-size: 80px 60px;
+    -o-background-size: 80px 60px;
+}
+
+#m01 {
+    background-image: url(../images/02_01.gif);
+}
+
+#m02 {
+    background-image: url(../images/02_02.gif);
+}
+
+#m03 {
+    background-image: url(../images/02_03.gif);
+}
+
+#m04 {
+    background-image: url(../images/02_04.gif);
+}
+
+#m05 {
+    background-image: url(../images/02_05.gif);
+}
+
+#m06 {
+    background-image: url(../images/02_06.gif);
+}
+
+#m07 {
+    background-image: url(../images/02_07.gif);
+}
+
+#m08 {
+    background-image: url(../images/02_08.gif);
+}
+
+#m09 {
+    background-image: url(../images/02_09.gif);
+}
+
+#m10 {
+    background-image: url(../images/02_10.gif);
+}
+
+#m11 {
+    background-image: url(../images/02_11.gif);
+}
+
+#m12 {
+    background-image: url(../images/02_12.gif);
+}
+
+#m13 {
+    background-image: url(../images/02_13.gif);
+}
+
+#m14 {
+    background-image: url(../images/02_14.gif);
+}
+
+#m15 {
+    background-image: url(../images/02_15.gif);
+}
+
+#m16 {
+    background-image: url(../images/03_16.gif);
+}
+
+#m17 {
+    background-image: url(../images/02_17.gif);
+}
+
+#m18 {
+    background-image: url(../images/02_18.gif);
+}
+
+#m19 {
+    background-image: url(../images/02_19.gif);
+}
+
+#m20 {
+    background-image: url(../images/02_20.gif);
+}
+
+#m21 {
+    background-image: url(../images/03_21.gif);
+}
+
+#m22 {
+    background-image: url(../images/02_22.gif);
+}
+
+#m23 {
+    background-image: url(../images/02_23.gif);
+}
+
+#m24 {
+    background-image: url(../images/02_24.gif);
+}
+
+.ren {
+    width: 70px;
+    height: 50px;
+    background-size: 70px 50px;
+    -moz-background-size: 70px 50px;
+    -moz-background-size: 70px 50px;
+    -o-background-size: 70px 50px;
+    background-image: url(../images/ren_03.gif);
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 320px;
+}
+#mission01{
+	display: none;
+}

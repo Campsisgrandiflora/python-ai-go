@@ -1,0 +1,334 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main/css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main/css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+
+    <div id="live2" style="top:200px; width:200px; height: 400px; position: fixed;">
+        <a href="{{ url_for('main.chat') }}" target="_blank">
+            <img src="{{ url_for('static', filename='main/img/0.jpg') }}" alt="" id="img-live"
+                 style="width: 80%; height: 80%; cursor:pointer;">
+        </a>
+    </div>
+    <!--   第一页 -->
+    <!-----直播信息-->
+    <!--<div id="live" style="width:100%; height: 160px;">
+        <a href="http://www.baidu.com" target="_blank">
+            <img src="{{ url_for('static', filename='main/img/live.png') }}" alt="" id="img-live"
+                 style="width: 100%; height: 100%; cursor:pointer;">
+        </a>
+    </div>-->
+
+    <section id="first-page"
+             style="background-image: url({{ url_for('static', filename='main/img/images/背景图片1.gif') }}); background-size: 100%;">
+        <div class="container first-home-page">
+            <div class="row mylogo">
+                <div class="logo">
+                    <a href="#"><img src="{{ url_for('static', filename='main/img/images/logo_03.gif') }}" alt=""></a>
+                </div>
+                <h3 class="logotext" style="color: white;">AI</h3>
+                <h3 class="logotext" style="color: white;">GO</h3>
+            </div>
+
+            <!-- 面板链接 -->
+            <div class="row panel-link">
+                <a href="{{ url_for('main.user_list', page=1) }}" style="margin-left: 355px;">人才市场</a>
+                <a href="{{ url_for('main.demo_list', page=1) }}" style="margin-left: 60px;">demo库</a>
+                <a href="{{ url_for('main.demand_list', page=1) }}">需求大厅</a>
+                <br>
+                <a href="{{ url_for('main.mail_list', page=1) }}" style="margin-left: 305px;">培训资源</a>
+                <a href="{{ url_for('main.codeditor') }}">数据分析</a>
+                <a href="{{ url_for('main.question_list', page=1) }}">AI题库</a>
+                <a href="{{ url_for('bbs.index') }}">交流社区</a>
+            </div>
+
+
+            <!-- 轮播图 -->
+            <div class="carousel" data-gap="20" style="margin-top: 0px; position: relative;">
+                <figure style="margin-top: 0px;">
+                    <img src="{{ url_for('static', filename='main/img/images/图片1_03.gif') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/5.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/1.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/2.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/3.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/4.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/6.jpg') }}" alt="">
+                    <img src="{{ url_for('static', filename='main/img/7.jpg') }}" alt="">
+                </figure>
+                <nav class="mycarousel-nav">
+                    <button class="nav prev">
+                        <sapn class="glyphicon glyphicon-chevron-left"></sapn>
+                    </button>
+                    <button class="nav next" style="margin-left: 900px;">
+                        <sapn class="glyphicon glyphicon-chevron-right"></sapn>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- 第二页 -->
+    <section id="secend-page"
+             style="background-image: url({{ url_for('static', filename='main/img/images/背景图片2.gif') }}); background-size: 100%;">
+        <div class="container secend-home-page">
+
+            <div class="row" style="margin-top: 40px; margin-left: 60px;"><h3 class="myh3" style="color: white">
+                demo库</h3></div>
+
+            <div class="row more">
+                <a href="{{ url_for('main.demo_list', page=1) }}">更多<span class="glyphicon glyphicon-menu-right"></span><span
+                        class="glyphicon glyphicon-menu-right"></span></a>
+            </div>
+
+            <div class="info-main">
+                <div class="left-side">
+                    <button id="b1" class="  myactive" style="margin-top: 0px;">猜你需要</button>
+                    <button id="b2" class="  mynoactive">最新发布</button>
+                    <button id="b3" class="  mynoactive">热门demo</button>
+                </div>
+                <!-- 按推荐排序 -->
+                <div class="right-side container-fluid list1">
+                    {% for v in re_demos %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/项目默认图片.png') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demo_detail', id=v.id) }}">
+                                {#                                <img src="holder.js/144x144"#}
+                                {#                                     class="img-responsive lazy center-block" alt=""#}
+                                {#                                     href="{{ url_for('main.demo_detail', id=v.id) }}">#}
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demo_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 按时间排序 -->
+                <div class="right-side container-fluid list2" hidden>
+                    {% for v in new_demos %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/项目默认图片.png') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demo_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demo_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 按火热程度排序 -->
+                <div class="right-side container-fluid list3" hidden>
+                    {% for v in hot_demos %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/项目默认图片.png') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demo_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demo_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--   第三页 -->
+    <section id="third-page"
+             style="background-image: url({{ url_for('static', filename='main/img/images/背景图片1.gif') }}); background-size: 100%;">
+        <div class="container secend-home-page">
+
+            <div class="row" style="margin-top: 40px; margin-left: 60px;"><h3 class="myh3" style="color: white">
+                需求大厅</h3></div>
+
+            <div class="row more">
+                <a href="{{ url_for('main.demand_list', page=1) }}">更多<span
+                        class="glyphicon glyphicon-menu-right"></span><span
+                        class="glyphicon glyphicon-menu-right"></span></a>
+            </div>
+            <div class="info-main">
+                <div class="left-side">
+                    <button id="b4" class=" myactive" style="margin-top: 0px;">猜你需要</button>
+                    <button id="b5" class=" mynoactive">最新发布</button>
+                    <button id="b6" class=" mynoactive">热门需求</button>
+                </div>
+                <!-- 按推荐排序 -->
+                <div class="right-side container-fluid list4">
+                    {% for v in re_demands %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/demand.jpg') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demand_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demand_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 按时间排序 -->
+                <div class="right-side container-fluid list5" hidden>
+                    {% for v in new_demands %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/demand.jpg') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demand_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demand_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 按火热程度排序 -->
+                <div class="right-side container-fluid list6" hidden>
+                    {% for v in hot_demands %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="{{ url_for('static',filename='main/img/demand.jpg') }}"
+                                     class="center-block" alt="" style="width: 144px; height: 144px" ;
+                                     href="{{ url_for('main.demand_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <a class="text" title="{{ v.name }}"
+                                       href="{{ url_for('main.demand_detail', id=v.id) }}">{{ v.name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第四页 -->
+    <section id="forth-page"
+             style="background-image: url({{ url_for('static', filename='main/img/images/背景图片2.gif') }}); background-size: 100%;">
+        <div class="container forth-home-page">
+
+            <div class="row" style="color: white;margin-top: 40px; margin-left: 60px;"><h3 class="myh3">人才库</h3></div>
+
+            <div class="row more">
+                <a href="{{ url_for('main.user_list', page=1) }}">更多<span class="glyphicon glyphicon-menu-right"></span><span
+                        class="glyphicon glyphicon-menu-right"></span></a>
+            </div>
+
+            <div class="info-main">
+                <div class="left-side">
+                    <button id="b7" class="  myactive" style="margin-top: 0px;">猜你需要</button>
+                    <button id="b8" class="  mynoactive">最新注册</button>
+                    <button id="b9" class="  mynoactive">热门人才</button>
+                </div>
+                <!-- 按推荐排序 -->
+                <div class="right-side container-fluid list1">
+                    {% for v in re_users %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                {% if v.face %}
+                                    <img src="{{ url_for('static', filename='uploads/user/'+v.uuid+'/'+v.face) }}" alt=""
+                                    href="{{ url_for('user.zone', user_id=v.id) }}" style="width: 100px;height: 100px;">
+                                {% else %}
+                                <img src="{{ url_for('static', filename='main/img/默认用户.jpg') }}"
+                                     class="img-responsive lazy center-block" alt=""
+                                     href="{{ url_for('user.zone', user_id=v.id) }}" style="width: 100px;height: 100px;">
+                                {% endif %}
+                                <div class="caption">
+                                    <p class="text-center">
+                                        <a href="{{ url_for('user.zone',user_id=v.id ) }}">{{ v.name }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 按时间排序 -->
+                <div class="right-side container-fluid list2" hidden>
+                    {% for v in new_users %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="holder.js/144x144"
+                                     class="img-responsive lazy center-block" alt=""
+                                     href="{{ url_for('main.demo_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <p class="text-center">
+                                        <a href="{{ url_for('user.zone',user_id=v.id ) }}">{{ v.name }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 按火热程度排序 -->
+                <div class="right-side container-fluid list3" hidden>
+                    {% for v in hot_users %}
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="holder.js/144x144"
+                                     class="img-responsive lazy center-block" alt=""
+                                     href="{{ url_for('main.demo_detail', id=v.id) }}">
+                                <div class="caption">
+                                    <p class="text-center">
+                                        <a href="{{ url_for('user.zone',user_id=v.id ) }}">{{ v.name }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fourth-page"
+             style="background-image: url({{ url_for('static', filename='main/img/images/背景图片2.gif') }}); background-size: 100%;">
+
+        <div class="container fourth-home-page" style="background-color: white">
+            <div class="row big-advisory">
+                <a href="#"><img src="{{ url_for('static', filename='main/img/images/大咨询_03.gif') }}" alt=""></a>
+            </div>
+            <div class="nav nav-advisory">
+                <a id='a1' href="#">月度精选</a>
+                <a id='a2' href="#">本周排行</a>
+                <a id='a3' href="#" class="my-a-active">今日头条</a>
+            </div>
+
+            <div class="myadvisory">
+                <div class="advisory-body">
+                    <a href="#"><img src="{{ url_for('static', filename='main/img/images/咨询1_03.gif') }}" alt=""></a>
+                </div>
+            </div>
+            <div class="myadvisory">
+                <div class="advisory-body">
+                    <a href="#"><img src="{{ url_for('static', filename='main/img/images/咨询2_03.gif') }}" alt=""></a>
+                </div>
+            </div>
+            <div class="myadvisory">
+                <div class="advisory-body">
+                    <a href="#"><img src="{{ url_for('static', filename='main/img/images/咨询1_03.gif') }}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='main/js/index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,323 @@
+body{
+      background:url("../images/背景.gif");
+
+      width: 100%;
+      background-size: 100%;
+}
+.main-body{
+     width: 1100px;
+     /*height: 900px;*/
+    height: auto;
+     margin: 0px auto;
+     margin-top: 100px;
+     background-color: white;
+     border-radius: 8px;
+     box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+.my-top{
+    height: 100px;
+    border-bottom: 2px solid #cecece;
+    background-color: white;
+        border-radius: 8px;
+
+}
+.my-top h4{
+    border: none;
+    margin-left: 240px;
+    font-size: 25px;
+    font-family: 黑体;
+    font-color:blue;
+    height: 80px;
+    width: 35em;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.my-top h4 p{
+    border: none;
+    margin-left: 20px;
+    font-size: 18px;
+    font-family: 黑体;
+    height: 80px;
+    width: 35em;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.change{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 110px;
+}
+.photo{
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 80px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+.myleft{
+    float: left;
+    border-right: 2px solid #cecece;
+    width: 200px;
+    height: auto;
+    padding: 0px;
+}
+.myleft ul{
+    margin-top: 20px;
+    padding: 0px;
+
+}
+.myleft li{ 
+    font-size: 20px;
+    width: 90px;
+    border-bottom: 2px solid #cecece;
+    margin: 0px auto;
+    list-style: none;
+    margin-top: 15px;
+}
+.myleft li a{
+    display: block;
+    color: black;
+    margin-bottom:8px;
+    font-family: 黑体;
+    font-size: 20px;
+}
+li a:link { 
+color: #000000; 
+text-decoration: none; 
+} 
+li a:visited { 
+color: #000000; 
+text-decoration: none; 
+} 
+li a:hover { 
+color: #999999; 
+text-decoration: none; 
+} 
+.myright{
+    float: left;
+    height: 470px;
+    width: 800px;
+}
+.R-top{
+    height: 50px;
+    padding: 0px;
+    line-height: 50px;
+    margin-top: 10px;
+}
+.R-top p{
+    margin-left: 70px;
+    display: block;
+    font-size: 20px;
+}
+.R-bottom{
+    width: 880px;
+    height: 410px;
+    overflow: auto;
+}
+
+.myitem{
+    float: left;
+    width: 400px;
+    height: 175px;
+    background-color: #E7E7E7;
+    margin-left: 30px;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.myitem h3{
+    margin: 0px;
+    float: left;
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: black;
+    border-bottom: 2px solid black;
+}
+.myitem button{
+    outline: none;
+    border: none;
+    float: left;
+    background-color: inherit;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+h3 a{
+    color: black;
+    outline: none;
+}
+h3 a:hover{
+    color: #3399ff;
+    text-decoration-line: none;
+}
+.demo-comp{
+    display: block;
+    float: left;
+    width: 120px;
+    height:90px;
+    color: black;
+    background-color: white;
+    margin-left: 10px;
+    margin-top: 25px;
+}
+
+.mylike{
+    float: left;
+    width: 300px;
+    height: 200px;
+    background-color: #E7E7E7;
+    margin-left: 30px;
+    margin-top: 20px;
+    padding: 0px;
+}
+
+.mylike h3{
+    margin: 0px;
+    float: left;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: black;
+    border-bottom: 2px solid black;
+}
+.like-comp{
+    display: block;
+    width: 100px;
+    height:100px;
+    color: black;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+/*以下为 解决方案的div*/
+
+.blue-block {
+    background-color: #3399ff;
+    height: 40px;
+    width: 10px;
+    margin-top: 10px;
+    float: left;
+}
+
+.res-item {
+    height: 60px;
+    width: 670px;
+    margin: 0px auto;
+    background-color: #cecece;
+    border-radius: 10px;
+    box-shadow: 0px 0px 7px rgba(83, 83, 83, 3);
+    margin-top: 40px;
+}
+
+
+/*解决方案的链接*/
+
+.res-name {
+    float: left;
+    margin-top: 10px;
+    display: block;
+    height: 40px;
+    width: 290px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #999999;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+
+
+/*demo-info div包含了企业名和demo名*/
+
+.demo-info {
+    float: left;
+    width: 180px;
+    height: 60px;
+    margin-left: 20px;
+}
+
+td {
+    margin-top: 5px;
+    display: block;
+    float: left;
+    width: 80px;
+    height: 25px;
+    padding: 0px;
+}
+
+.demo-info a {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: black;
+}
+
+.demo-info a:hover {
+    color: #3399ff;
+    text-decoration: none;
+}
+
+
+/*。。。。。。。。。。。。。。。。。。。。。*/
+
+.score-time {
+    float: left;
+    width: 160px;
+    height: 60px;
+    padding: 0px;
+}
+
+
+/*评分*/
+
+h3 {
+    height: 35px;
+    width: 160px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 25px;
+    line-height: 35px;
+    border-bottom: 1px solid white;
+}
+
+
+/*发布时间*/
+
+h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 160px;
+    height: 25px;
+    line-height: 25px;
+}
+
+
+/*解决方案结束*/

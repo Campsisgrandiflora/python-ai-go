@@ -1,0 +1,299 @@
+*{
+	/*缺少布局初始化代码*/
+	font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+	
+	
+}
+.main-body{
+     width: 1400px;
+     height: 1100px;
+     margin: 0px auto;
+     margin-top: 100px;
+     background-color: white;
+     border-radius: 8px;
+     box-shadow: 0px 0px 10px rgba(83, 83, 83, 3);
+}
+.rect{
+	background: #fff;
+	width:1400px;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(26,26,26,0.3);
+	box-sizing: border-box;
+	color: #000000;
+	-webkit-box-shadow: 0px 1px 3px rgba(26,26,26,0.3);
+}
+
+
+/*------------------------------------------------------顶栏-------------------------------------------------*/
+#panel-top{
+	width: 1400px;
+	height: 140px;
+}
+#container-img-background{
+	float:left;
+	width:100%;
+	height:100%;
+}
+#img-background{
+	width:100%;
+	height:100%;
+}
+#label-my-title{
+	float: left;
+	margin-top: -106px;
+	margin-left: 100px;
+	font-size: 36px;
+}
+#label-my-describe{
+	float: left;
+	font-size: 16px;
+	margin-left: 120px;
+	margin-top: -42px;
+}
+
+#container-label-my3{
+	float: left;
+	margin-left: 480px;
+	margin-top: -80px;
+}
+#label-my-follows{
+	float:left;
+	font-size: 16px;
+	color: #0084ff;
+	cursor: pointer;
+}
+#label-my-fans{
+	float:left;
+	font-size: 16px;
+	color: #0084ff;
+	cursor:pointer;
+	margin-left:30px;
+}
+#label-my-posts{
+	float:left;
+	font-size: 16px;
+	color: #0084ff;
+	cursor:pointer;
+	margin-left:30px;
+}
+/*------------------------*/
+.btn-blue-line{
+	cursor: pointer;
+	background-color:rgba(255,255,255,0.6);
+	border: 1px solid;
+	border-radius: 3px;
+	color: #0084ff;
+	border-color: #0084ff;	
+	text-align: center;
+	font-size: 16px;
+}
+.btn-blue-line:hover{
+	/*background-color:rgba(255,255,255,0.8)*/
+	background-color:rgba(0,132,255,0.6);
+	color: rgba(255,255,255,1);
+}
+#btn-follow{
+	float: left;
+	width: 96px;
+	height: 36px;
+	margin-top: -90px;
+	margin-left: 920px;
+}
+#btn-message{
+	float: left;
+	width: 96px;
+	height: 36px;
+	margin-top: -90px;
+	margin-left: 1040px;
+}
+/*-------------------------------------------侧边栏--------------------------------------------*/
+#panel-left{
+	float:left;
+	margin-top:40px;
+	margin-left:20px;
+}
+/*-----------------------用户信息-------------------------*/
+#userinfo{
+	width: 250px;
+	height: 450px;
+}
+#img-head{
+	width: 130px;
+	height: 130px;
+	margin-top: 64px;
+	margin-left:60px;
+	border-radius: 2px;
+	box-shadow: 0px 0px 5px rgba(26,26,26,0.40);
+}
+.label-userinfo{
+	font-size:16px;
+	color:#8590a6;
+	margin-left:60px;
+	text-align:left;
+}
+#container-label-user5{
+	margin-top:32px;
+}
+
+/*---------------------------------众筹-------------------------------*/
+#crowdfunding{
+	width: 250px;
+	height: 100px;
+	margin-top:20px;
+}
+#contianer-label-crowdfunding{
+	float:left;
+	margin-top:12px;
+}
+#blue-rect-small4{
+	float:left;
+	width:5px;
+	height:18px;
+}
+#label-crowdfunding{
+	float:left;
+	font-size:18px;
+	margin-left:8px;
+	margin-top:-3px;
+}
+#label-crowdfunding1{
+	float:left;
+	text-align: left;
+	margin-left: -60px;
+	margin-top:50px;
+}
+#btn-view{
+	float:left;
+	width:64px;
+	margin-left:12px;
+	margin-top:48px;
+}
+/*------------------------------------------------------中间部分-----------------------------------------------------*/
+#panel-mid{
+	float:left;
+	width:1000px;
+	margin-left:30px;
+	margin-top:20px;
+}
+.blue-rect{
+	background-color:rgb(0,132,255);
+}
+/*-------------------------------用户画像----------------------------------*/
+#portrait{
+	width:1000px;
+	height:600px;
+	margin-top:20px;
+}
+#contianer-label-user-protrait{
+	float:left;
+	margin-top:16px;
+}
+#blue-rect1{
+	float:left;
+	width:8px;
+	height:32px;
+}
+#label-user-protrait{
+	float:left;
+	font-size:28px;
+	margin-top:-6px;
+	margin-left:6px;
+	
+}
+
+#container-graph-protrait{
+	float:left;
+	margin-left:-103px;
+	margin-top:70px;
+}
+/*-------------------------------*/
+#graph-protrait1{
+	float:left;
+	width:300px;
+	height:360px;
+}
+#contianer-label-user-protrait1{
+	margin-top:12px;
+}
+#blue-rect-small1{
+	float:left;
+	width:5px;
+	height:18px;
+}
+#label-user-protrait1{
+	float:left;
+	font-size:18px;
+	margin-left:8px;
+	margin-top:-3px;
+}
+/*-----------------------*/
+#graph-protrait2{
+	float:left;
+	width:300px;
+	height:360px;
+	margin-left:30px;
+}
+#contianer-label-user-protrait2{
+	margin-top:12px;
+}
+#blue-rect-small2{
+	float:left;
+	width:5px;
+	height:18px;
+}
+#label-user-protrait2{
+	float:left;
+	font-size:18px;
+	margin-left:8px;
+	margin-top:-3px;
+}
+/*-----------------*/
+#graph-protrait3{
+	float:left;
+	width:300px;
+	height:360px;
+	margin-left:30px;
+}
+#contianer-label-user-protrait3{
+	margin-top:12px;
+}
+#blue-rect-small3{
+	float:left;
+	width:5px;
+	height:18px;
+}
+#label-user-protrait3{
+	float:left;
+	font-size:18px;
+	margin-left:8px;
+	margin-top:-3px;
+}
+/*-----------------------------------Demo---------------------------------------*/
+
+#demo{
+	width:1000px;
+	height:300px;
+	margin-top:20px;
+}
+#contianer-label-demo{
+	float:left;
+	margin-top:16px;
+	margin-left:-15px;
+}
+#contianer-label-demos{
+	float:left;
+	margin-top:16px;
+	margin-left:35px;
+	overflow:auto;
+}
+#blue-rect2{
+	float:left;
+	width:8px;
+	height:32px;
+}
+#label-demo{
+	float:left;
+	font-size:28px;
+	margin-top:-6px;
+	margin-left:6px;
+}

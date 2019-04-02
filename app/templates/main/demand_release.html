@@ -1,0 +1,194 @@
+{% extends 'base/base_1.html' %}
+
+{% block css %}
+    <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='main/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='main/js/imageselect.js') }}"></script>
+    <link href="{{ url_for('static', filename='main/css/imageselect.css') }}" media="screen" rel="stylesheet"
+          type="text/css"/>
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='datepicker/bootstrap-datetimepicker.min.css') }}"
+          media="screen">
+{% endblock %}
+
+{% block content %}
+    <div class="row"
+         style="background-image: url({{ url_for('static', filename='main/img/发布需求背景_02.gif') }}); background-size: 100%;width: 1200px;margin: 0px auto;">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;填写demand说明</h3>
+                </div>
+                <div class="panel-body">
+                    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+                        <div class="alert alert-danger" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+                        <div class="alert alert-success" role="alert">
+                            <p class="alert-link">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="input_name"><span
+                                        class="glyphicon glyphicon-user"></span>&nbsp;{{ form.name.label }}</label>
+                                {{ form.name }}
+                            </div>
+                            {% for err in form.name.errors %}
+                                <div class="col-md-12" id="input_user">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for=""><span
+                                        class="glyphicon glyphicon-music"></span> 请选择需求技术标签</label>
+
+                                <ul class="dowebok">
+                                    {% for tag in tags %}
+                                        <li><input type="checkbox" name="{{ tag.id }}"
+                                                   data-labelauty={{ tag.name }}></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label for=""><span
+                                        class="glyphicon glyphicon-music"></span> 请选择需求图片</label>
+
+                                <select name="logo">
+                                    <option value="1">{{ url_for('static', filename='main/img/1.jpg') }}</option>
+                                    <option value="2">{{ url_for('static', filename='main/img/2.jpg') }}</option>
+                                    <option value="3">{{ url_for('static', filename='main/img/3.jpg') }}</option>
+                                    <option value="4">{{ url_for('static', filename='main/img/4.jpg') }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group datepicker">
+                                <label for="input_finish_time"><span
+                                        class="glyphicon glyphicon-time"></span>&nbsp;{{ form.finish_time.label }}
+                                </label>
+                                {{ form.finish_time }}
+                            </div>
+                            {% for err in form.finish_time.errors %}
+                                <div class="col-md-12" id="input_user">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_description"><span
+                                        class="glyphicon glyphicon-text-width"></span>&nbsp;{{ form.description.label }}
+                                </label>
+                                <div for="input_description" style="color: #ccc;">
+                                    注意:<br> 请将详细的需求描述填写入下框中，该描述将向所有用户展示，请注意企业信息的安全，将根据需求描述进行demo的匹配，
+                                    如果有额外的文件，例如数据，演示ppt等，请放在附件中
+                                </div>
+                                {{ form.description }}
+                            </div>
+                            {% for err in form.description.errors %}
+                                <div class="col-md-12" id="input_user">
+                                    <font style="color: red">{{ err }}</font>
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <label for="input_url"><span
+                                        class="glyphicon glyphicon-upload"></span>{{ form.url.label }}</label>
+                                {{ form.url }}
+                                {% for err in form.url.errors %}
+                                    <div class="col-md-12">
+                                        <font style="color: red">{{ err }}</font>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input_description" style="color: #ccc;">
+                                    注意:平台将根据确认后的文档生成推荐的领域标签
+                                </label>
+                                <a class="btn btn-success" id="sure" style="float:right;">确认文档</a>
+                            </div>
+                            <div class="form-group">
+                                <label for=""><span
+                                        class="glyphicon glyphicon-music"></span> 根据文档内容分析推荐的标签</label>
+                                <div class="mylabel" style="display:none">
+                                    <span class="badge default"
+                                          style="font-size:20px;margin-left:5px;">&nbsp;知识表示&nbsp;</span>
+                                    <span class="badge default" style="font-size:20px;margin-left:5px;">&nbsp;自然语言处理&nbsp;</span>
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                {{ form.csrf_token }}
+                                {{ form.submit }}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select[name=logo]').ImageSelect({dropdownWidth: 425});
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#sure").click(function () {
+                $(".mylabel").show();
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#sure").click(function () {
+                $(".mylabel").show();
+            });
+        });
+    </script>
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='datepicker/bootstrap-datetimepicker.min.js') }}"
+            charset="UTF-8"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('description', {
+            {#        开启上传功能，配置上传路径#}
+            filebrowserUploadUrl: '/demandupload/'
+        });
+    </script>
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input').labelauty();
+            $('#datepicker').datetimepicker({
+                format: 'yyyy-mm-dd',   // 日期格式
+                autoclose: true,    // 选择完成后自动关闭
+                todayHighlight: true,   // 今天的日期高亮
+                keyboardNavigation: true,   // 允许使用键盘进行选择
+                pickerPosition: 'bottom-left',  // 选择框的选择位置
+                startView: 2,  // 开始选择的表格 年-月
+                minView: 3,    // 结束选择的表格
+            });
+        });
+    </script>
+{% endblock %}

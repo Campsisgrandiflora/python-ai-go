@@ -1,0 +1,44 @@
+{% extends 'bbs/bbs_base.html' %}
+{% block content %}
+    <head>
+        <script type="text/javascript" src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+    </head>
+    <body>
+    <div class="container" style="padding:20px">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;发表帖子</h3>
+            </div>
+            <div class='panel-body'>
+                <form method="post" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-group">
+                        {{ form.title(class='form-control', placeholder='请输入标题', type='text') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.ckdemo(class='ckeditor') }}
+                        <script type="text/javascript">
+                            CKEDITOR.replace("ckdemo", {
+                                filebrowserUploadUrl: 'bbs/ckupload/'
+                            });
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        {{ form.url(class='form-control', placeholder='请插入附件') }}
+                    </div>
+                    <div class="dropdown">
+
+                        {{ form.belongedPlate(class="dropdown") }}
+
+                    </div>
+                    <div class="form-group box-footer ">
+                        {{ form.submit(class="btn btn-success col-md-8 col-md-offset-2") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+
+{% endblock %}

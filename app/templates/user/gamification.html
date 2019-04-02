@@ -1,0 +1,128 @@
+{% extends 'user/menu.html' %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='jquery-pretty-radio-checkbox/css/jquery-labelauty.css') }}">
+    <style>
+        dowebok. ul {
+            list-style-type: none;
+        }
+
+        .dowebok li {
+            display: inline-block;
+        }
+
+        .dowebok li {
+            margin: 10px 0;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/css/maze.css') }}">
+    <script src="{{ url_for('static', filename='user/js/maze.js') }}" type="text/javascript" charset="utf-8" async
+            defer></script>
+{% endblock %}
+
+{% block builtin %}
+    <div class="container">
+        <div class="col-md-9" onload="aa()">
+            <div class="maze">
+                <div id="m01" class="mazeb">
+                </div>
+                <div id="m02" class="mazeb">
+                </div>
+                <div id="m03" class="mazeb">
+                </div>
+                <div id="m04" class="mazeb">
+                </div>
+                <div id="m05" class="mazeb">
+                </div>
+                <div id="m06" class="mazeb">
+                </div>
+                <div id="m07" class="mazeb">
+                </div>
+                <div id="m08" class="mazeb">
+                </div>
+                <div id="m09" class="mazeb">
+                </div>
+                <div id="m10" class="mazeb">
+                </div>
+                <div id="m11" class="mazeb">
+                </div>
+                <div id="m12" class="mazeb">
+                </div>
+                <div id="m13" class="mazeb">
+                </div>
+                <div id="m14" class="mazeb">
+                </div>
+                <div id="m15" class="mazeb">
+                </div>
+                <div id="m16" class="mazeb">
+                </div>
+                <div id="m17" class="mazeb">
+                </div>
+                <div id="m18" class="mazeb">
+                </div>
+                <div id="m19" class="mazeb">
+                </div>
+                <div id="m20" class="mazeb">
+                </div>
+                <div id="m21" class="mazeb">
+                </div>
+                <div id="m22" class="mazeb">
+                </div>
+                <div id="m23" class="mazeb no">
+                </div>
+                <div id="m24" class="mazeb">
+                </div>
+                <div class="ren" id="ren">
+                </div>
+            </div>
+            <div class="mission">
+                <label class="label label-success" style="font-size: 18px;">你的任务是</label>
+                <div>
+                    <div style="border: 1px dashed #3399ff;width: auto;float: left;" id="mission01">
+                        学习并掌握java String字符串的基础知识，然后通过考试击败怪物
+                        <button type="">参加考试</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            你需要学习Sting、StringBuffer和StringBuilder的区别来击败怪物，才能继续通行
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='user/images/知识图谱.jpg') }}" alt=""
+                 style="width: 75%;height: 75%;margin-top: 20px;">
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $(document).keydown(function (event) {
+            event.preventDefault();
+        });
+    </script>
+    <script src="{{ url_for('static', filename='jquery-pretty-radio-checkbox/js/jquery-labelauty.js') }}"></script>
+{% endblock %}
